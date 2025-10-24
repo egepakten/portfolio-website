@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const TechStack = () => {
   const [hoveredTech, setHoveredTech] = useState(null);
+  const [selectedTech, setSelectedTech] = useState(null);
 
   const technologies = [
     { name: "React", proficiency: 95, icon: "⚛️", category: "Frontend" },
@@ -19,6 +20,107 @@ const TechStack = () => {
     { name: "GraphQL", proficiency: 78, icon: "◈", category: "API" },
   ];
 
+  // Project-Technology mapping with language percentages (demo data)
+  const projectTechUsage = {
+    React: [
+      {
+        project: "AI SaaS Platform",
+        languages: [
+          { name: "TypeScript", percentage: 52.1, color: "#3178c6" },
+          { name: "JavaScript", percentage: 28.3, color: "#f1e05a" },
+          { name: "CSS", percentage: 15.6, color: "#563d7c" },
+          { name: "HTML", percentage: 4.0, color: "#e34c26" },
+        ],
+      },
+      {
+        project: "E-Commerce Dashboard",
+        languages: [
+          { name: "JavaScript", percentage: 45.2, color: "#f1e05a" },
+          { name: "TypeScript", percentage: 32.8, color: "#3178c6" },
+          { name: "CSS", percentage: 18.0, color: "#563d7c" },
+          { name: "HTML", percentage: 4.0, color: "#e34c26" },
+        ],
+      },
+    ],
+    TypeScript: [
+      {
+        project: "AI SaaS Platform",
+        languages: [
+          { name: "TypeScript", percentage: 52.1, color: "#3178c6" },
+          { name: "JavaScript", percentage: 28.3, color: "#f1e05a" },
+          { name: "CSS", percentage: 15.6, color: "#563d7c" },
+          { name: "HTML", percentage: 4.0, color: "#e34c26" },
+        ],
+      },
+      {
+        project: "Design System",
+        languages: [
+          { name: "TypeScript", percentage: 68.5, color: "#3178c6" },
+          { name: "CSS", percentage: 22.1, color: "#563d7c" },
+          { name: "JavaScript", percentage: 7.4, color: "#f1e05a" },
+          { name: "HTML", percentage: 2.0, color: "#e34c26" },
+        ],
+      },
+    ],
+    "Node.js": [
+      {
+        project: "AI SaaS Platform",
+        languages: [
+          { name: "TypeScript", percentage: 52.1, color: "#3178c6" },
+          { name: "JavaScript", percentage: 28.3, color: "#f1e05a" },
+          { name: "CSS", percentage: 15.6, color: "#563d7c" },
+          { name: "HTML", percentage: 4.0, color: "#e34c26" },
+        ],
+      },
+      {
+        project: "E-Commerce Dashboard",
+        languages: [
+          { name: "JavaScript", percentage: 58.9, color: "#f1e05a" },
+          { name: "TypeScript", percentage: 35.1, color: "#3178c6" },
+          { name: "Shell", percentage: 6.0, color: "#89e051" },
+        ],
+      },
+    ],
+    Python: [
+      {
+        project: "Data Analysis Tool",
+        languages: [
+          { name: "Python", percentage: 87.3, color: "#3572A5" },
+          { name: "Jupyter Notebook", percentage: 10.2, color: "#DA5B0B" },
+          { name: "Shell", percentage: 2.5, color: "#89e051" },
+        ],
+      },
+    ],
+    MongoDB: [
+      {
+        project: "E-Commerce Dashboard",
+        languages: [
+          { name: "JavaScript", percentage: 58.9, color: "#f1e05a" },
+          { name: "TypeScript", percentage: 35.1, color: "#3178c6" },
+          { name: "Shell", percentage: 6.0, color: "#89e051" },
+        ],
+      },
+      {
+        project: "Social Media App",
+        languages: [
+          { name: "JavaScript", percentage: 62.4, color: "#f1e05a" },
+          { name: "TypeScript", percentage: 30.1, color: "#3178c6" },
+          { name: "CSS", percentage: 7.5, color: "#563d7c" },
+        ],
+      },
+    ],
+    Docker: [
+      {
+        project: "AI SaaS Platform",
+        languages: [
+          { name: "TypeScript", percentage: 52.1, color: "#3178c6" },
+          { name: "JavaScript", percentage: 28.3, color: "#f1e05a" },
+          { name: "Dockerfile", percentage: 2.5, color: "#384d54" },
+        ],
+      },
+    ],
+  };
+
   const categories = [...new Set(technologies.map((tech) => tech.category))];
 
   return (
@@ -33,11 +135,18 @@ const TechStack = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl lg:text-5xl font-bold mb-12 flex items-center">
+          <h2 className="text-4xl lg:text-5xl font-bold mb-6 flex items-center">
             <span className="text-accent-cyan font-mono mr-4">04.</span>
             Tech Stack
             <div className="ml-8 h-[1px] flex-1 bg-gradient-to-r from-accent-cyan/50 to-transparent" />
           </h2>
+
+          {/* Hint */}
+          <p className="text-gray-400 text-center mb-8">
+            💡 Click on technologies with a{" "}
+            <span className="inline-block w-2 h-2 bg-accent-cyan rounded-full animate-pulse mx-1" />
+            to see project language breakdowns
+          </p>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {technologies.map((tech, index) => (
@@ -50,14 +159,28 @@ const TechStack = () => {
                 onHoverStart={() => setHoveredTech(index)}
                 onHoverEnd={() => setHoveredTech(null)}
                 whileHover={{ y: -10 }}
+                onClick={() => setSelectedTech(tech.name)}
                 className="relative"
               >
                 <div className="glass rounded-lg p-6 text-center cursor-pointer hover:border-accent-cyan/50 transition-all duration-300 h-full flex flex-col items-center justify-center">
+                  {/* Clickable indicator */}
+                  {projectTechUsage[tech.name] && (
+                    <div className="absolute top-2 right-2 w-2 h-2 bg-accent-cyan rounded-full animate-pulse" />
+                  )}
+
                   <div className="text-5xl mb-3">{tech.icon}</div>
                   <h3 className="font-semibold text-white mb-2">{tech.name}</h3>
                   <span className="text-xs text-accent-cyan font-mono">
                     {tech.category}
                   </span>
+
+                  {/* Project count badge */}
+                  {projectTechUsage[tech.name] && (
+                    <span className="mt-2 text-[10px] text-gray-400 font-mono">
+                      {projectTechUsage[tech.name].length} project
+                      {projectTechUsage[tech.name].length > 1 ? "s" : ""}
+                    </span>
+                  )}
 
                   {/* Proficiency Indicator */}
                   <div className="w-full mt-4">
@@ -144,6 +267,120 @@ const TechStack = () => {
               </motion.div>
             ))}
           </div>
+
+          {/* Project Usage Modal */}
+          <AnimatePresence>
+            {selectedTech && projectTechUsage[selectedTech] && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setSelectedTech(null)}
+                className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+              >
+                <motion.div
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.9, opacity: 0 }}
+                  onClick={(e) => e.stopPropagation()}
+                  className="glass rounded-xl p-8 max-w-4xl w-full max-h-[80vh] overflow-y-auto border-2 border-accent-cyan/30"
+                >
+                  {/* Header */}
+                  <div className="flex items-center justify-between mb-6">
+                    <div>
+                      <h3 className="text-3xl font-bold mb-2">
+                        {selectedTech}
+                      </h3>
+                      <p className="text-gray-400 text-sm">
+                        Projects using this technology
+                      </p>
+                    </div>
+                    <button
+                      onClick={() => setSelectedTech(null)}
+                      className="p-2 hover:bg-accent-cyan/10 rounded-lg transition-colors"
+                    >
+                      <svg
+                        className="w-6 h-6 text-gray-400 hover:text-accent-cyan"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M6 18L18 6M6 6l12 12"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+
+                  {/* Projects List */}
+                  <div className="space-y-6">
+                    {projectTechUsage[selectedTech].map((item, idx) => (
+                      <motion.div
+                        key={idx}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: idx * 0.1 }}
+                        className="glass rounded-lg p-6"
+                      >
+                        {/* Project Name */}
+                        <h4 className="text-xl font-bold mb-4 text-accent-cyan">
+                          {item.project}
+                        </h4>
+
+                        {/* Language Bar */}
+                        <div className="mb-4">
+                          <div className="h-3 rounded-full overflow-hidden flex">
+                            {item.languages.map((lang, i) => (
+                              <div
+                                key={i}
+                                style={{
+                                  width: `${lang.percentage}%`,
+                                  backgroundColor: lang.color,
+                                }}
+                                className="transition-all duration-300 hover:opacity-80"
+                                title={`${lang.name}: ${lang.percentage}%`}
+                              />
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Language List */}
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                          {item.languages.map((lang, i) => (
+                            <div key={i} className="flex items-center gap-2">
+                              <div
+                                className="w-3 h-3 rounded-full"
+                                style={{ backgroundColor: lang.color }}
+                              />
+                              <div className="text-sm">
+                                <span className="font-mono text-gray-300">
+                                  {lang.name}
+                                </span>
+                                <span className="ml-2 text-accent-cyan font-bold">
+                                  {lang.percentage}%
+                                </span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  {/* Footer Info */}
+                  <div className="mt-6 pt-6 border-t border-accent-cyan/20">
+                    <p className="text-gray-400 text-sm text-center">
+                      💡 Click outside to close • Language percentages are based
+                      on code analysis
+                    </p>
+                  </div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
       </div>
     </section>
