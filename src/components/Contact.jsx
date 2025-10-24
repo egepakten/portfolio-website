@@ -1,42 +1,26 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(null);
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitStatus("success");
-      setFormData({ name: "", email: "", message: "" });
-
-      setTimeout(() => setSubmitStatus(null), 3000);
-    }, 1500);
-  };
-
   const socialLinks = [
-    { name: "GitHub", icon: "📦", url: "https://github.com" },
-    { name: "LinkedIn", icon: "💼", url: "https://linkedin.com" },
-    { name: "Twitter", icon: "🐦", url: "https://twitter.com" },
-    { name: "Email", icon: "📧", url: "mailto:your@email.com" },
+    { name: "GitHub", icon: "📦", url: "https://github.com/egepakten" },
+    {
+      name: "LinkedIn",
+      icon: "💼",
+      url: "https://linkedin.com/in/yourprofile",
+    },
+    { name: "Twitter", icon: "🐦", url: "https://twitter.com/yourhandle" },
+    { name: "Email", icon: "📧", url: "mailto:egepakten@example.com" },
   ];
+
+  const handleDownloadCV = () => {
+    // Create a link element and trigger download
+    const link = document.createElement("a");
+    link.href = "/CV_Kerem Ege Pakten.pdf";
+    link.download = "CV_Kerem_Ege_Pakten.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <section
@@ -99,99 +83,102 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Contact Form */}
-            <motion.form
-              onSubmit={handleSubmit}
+            {/* CV Download Section */}
+            <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="glass rounded-xl p-8"
+              className="glass rounded-xl p-8 flex flex-col items-center justify-center"
             >
-              <div className="space-y-6">
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-mono text-accent-cyan mb-2"
+              {/* CV Icon */}
+              <div className="mb-6">
+                <div className="w-32 h-32 bg-gradient-to-br from-accent-cyan to-accent-teal rounded-2xl flex items-center justify-center shadow-2xl shadow-accent-cyan/50">
+                  <svg
+                    className="w-16 h-16 text-navy-dark"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
                   >
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 bg-navy-light border border-accent-cyan/20 rounded-lg focus:border-accent-cyan focus:outline-none transition-colors text-white"
-                    placeholder="John Doe"
-                  />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                    />
+                  </svg>
                 </div>
-
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-mono text-accent-cyan mb-2"
-                  >
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 bg-navy-light border border-accent-cyan/20 rounded-lg focus:border-accent-cyan focus:outline-none transition-colors text-white"
-                    placeholder="john@example.com"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="message"
-                    className="block text-sm font-mono text-accent-cyan mb-2"
-                  >
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    rows="5"
-                    className="w-full px-4 py-3 bg-navy-light border border-accent-cyan/20 rounded-lg focus:border-accent-cyan focus:outline-none transition-colors text-white resize-none"
-                    placeholder="Your message here..."
-                  />
-                </div>
-
-                <motion.button
-                  type="submit"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  disabled={isSubmitting}
-                  className={`w-full py-4 rounded-lg font-mono font-bold transition-all duration-300 ${
-                    isSubmitting
-                      ? "bg-accent-cyan/50 cursor-not-allowed"
-                      : submitStatus === "success"
-                      ? "bg-green-500 text-white"
-                      : "bg-accent-cyan text-navy-dark hover:bg-accent-teal animate-glow"
-                  }`}
-                >
-                  {isSubmitting ? (
-                    <span className="flex items-center justify-center gap-2">
-                      <span className="inline-block w-4 h-4 border-2 border-navy-dark border-t-transparent rounded-full animate-spin" />
-                      Sending...
-                    </span>
-                  ) : submitStatus === "success" ? (
-                    "✓ Message Sent!"
-                  ) : (
-                    "Send Message"
-                  )}
-                </motion.button>
               </div>
-            </motion.form>
+
+              {/* CV Info */}
+              <h3 className="text-2xl font-bold mb-3 text-center">
+                Download My Resume
+              </h3>
+              <p className="text-gray-400 text-center mb-8 max-w-sm">
+                Get a detailed overview of my experience, skills, and
+                qualifications in PDF format.
+              </p>
+
+              {/* Download Button */}
+              <motion.button
+                onClick={handleDownloadCV}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full py-4 rounded-lg font-mono font-bold bg-accent-cyan text-navy-dark hover:bg-accent-teal transition-all duration-300 animate-glow flex items-center justify-center gap-3 group"
+              >
+                <svg
+                  className="w-5 h-5 group-hover:animate-bounce"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  />
+                </svg>
+                Download CV
+              </motion.button>
+
+              {/* View Online Button */}
+              <motion.a
+                href="/CV_Kerem Ege Pakten.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full mt-4 py-4 rounded-lg font-mono font-semibold bg-accent-cyan/10 text-accent-cyan border border-accent-cyan/20 hover:bg-accent-cyan/20 transition-all duration-300 flex items-center justify-center gap-3 group"
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                  />
+                </svg>
+                View Online
+              </motion.a>
+
+              {/* File Info */}
+              <div className="mt-6 text-center text-sm text-gray-500 font-mono">
+                <p>📄 PDF Document</p>
+                <p className="mt-1">Last updated: 2025</p>
+              </div>
+            </motion.div>
           </div>
 
           {/* Footer */}
@@ -204,7 +191,7 @@ const Contact = () => {
           >
             <p className="text-gray-400 font-mono">
               Designed & Built by{" "}
-              <span className="text-accent-cyan">Your Name</span>
+              <span className="text-accent-cyan">Kerem Ege Pakten</span>
             </p>
             <p className="text-gray-500 text-sm mt-2">
               © 2025 All rights reserved
