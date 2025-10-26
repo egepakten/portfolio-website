@@ -17,17 +17,18 @@ const Hero = () => {
           </p>
 
           <h1 className="text-6xl lg:text-8xl font-bold mb-4 gradient-text">
-            Your Name
+            Kerem Ege Pakten
           </h1>
 
-          <h2 className="text-4xl lg:text-6xl font-bold text-gray-400 mb-8">
-            I craft digital experiences
+          <h2 className="text-4xl lg:text-4xl font-bold text-gray-400 mb-8">
+            Junior Software Engineer | Cloud & DevOps Enthusiast
           </h2>
 
           <p className="text-gray-400 text-lg lg:text-xl max-w-2xl mb-12 leading-relaxed">
-            I'm a creative developer specializing in building exceptional
-            digital experiences. Currently focused on creating accessible,
-            pixel-perfect interfaces with modern web technologies.
+            Computer Science graduate from King's College London specializing in
+            cloud engineering and full-stack development. Experienced with AWS,
+            React, and TypeScript. Currently building Individual Cloud & AI
+            Project - while preparing for AWS Developer Associate certification.
           </p>
 
           <div className="flex flex-wrap gap-6">

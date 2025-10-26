@@ -6,10 +6,10 @@ const Contact = () => {
     {
       name: "LinkedIn",
       icon: "💼",
-      url: "https://linkedin.com/in/yourprofile",
+      url: "https://www.linkedin.com/in/kerem-pakten/",
     },
-    { name: "Twitter", icon: "🐦", url: "https://twitter.com/yourhandle" },
-    { name: "Email", icon: "📧", url: "mailto:egepakten@example.com" },
+
+    { name: "Email", icon: "📧", url: "mailto:egepakten@icloud.com" },
   ];
 
   const handleDownloadCV = () => {
@@ -78,7 +78,7 @@ const Contact = () => {
                 <p className="font-mono text-accent-cyan mb-2">$ status</p>
                 <p className="text-gray-400">
                   <span className="inline-block w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse" />
-                  Available for freelance work
+                  Available Immediately
                 </p>
               </div>
             </div>

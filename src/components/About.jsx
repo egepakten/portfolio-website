@@ -7,22 +7,24 @@ const About = () => {
 
   const terminalLines = [
     "$ whoami",
-    "> Full-Stack Developer | Creative Coder",
+    "> Junior Software Engineer | Cloud & DevOps Enthusiast",
     "",
     "$ cat bio.txt",
-    "> I'm a passionate developer who loves turning complex problems",
-    "> into simple, beautiful, and intuitive solutions. With a strong",
-    "> foundation in modern web technologies, I specialize in creating",
-    "> seamless user experiences that make an impact.",
+    "> Computer Science graduate from King's College London specializing in",
+    "> cloud engineering and full-stack development. After working as a Frontend",
+    "> Developer at Strand Analytica, I discovered my passion for cloud",
+    "> architecture and DevOps. Currently building WiseUni - a full-stack SaaS",
+    "> platform using AWS - while preparing for AWS Developer Associate",
+    "> certification.",
     "",
     "$ ls skills/",
-    "> Frontend Development  ████████████ 100%",
-    "> Backend Architecture  ██████████░░  85%",
-    "> UI/UX Design          █████████░░░  75%",
-    "> Cloud Infrastructure ████████░░░░  65%",
+    "> React & TypeScript    ████████████ 100%",
+    "> AWS Cloud Services    ██████████░░ 80%",
+    "> Cloud Infrastructure  ████████░░░░  65%",
+    "> DevOps Tools          █████████░░░  75%",
     "",
     "$ echo $INTERESTS",
-    "> [ Open Source, AI/ML, Web3, Creative Coding ]",
+    "> [ Full-Stack Development, AI/ML, Web3, Agentic RAG Systems ]",
   ];
 
   useEffect(() => {
@@ -86,8 +88,8 @@ const About = () => {
           {/* Additional Info Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
             {[
-              { number: "50+", label: "Projects Completed" },
-              { number: "5+", label: "Years Experience" },
+              { number: "6+", label: "Projects Completed" },
+              { number: "4+", label: "Years Experience with Coding" },
               { number: "100%", label: "Commitment" },
             ].map((stat, index) => (
               <motion.div

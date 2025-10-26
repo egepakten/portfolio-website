@@ -18,6 +18,8 @@ const TechStack = () => {
     { name: "Docker", proficiency: 82, icon: "🐳", category: "DevOps" },
     { name: "Git", proficiency: 90, icon: "📦", category: "Tools" },
     { name: "GraphQL", proficiency: 78, icon: "◈", category: "API" },
+    { name: "Flask", proficiency: 85, icon: "🐍", category: "Backend" },
+    { name: "Machine Learning", proficiency: 80, icon: "🤖", category: "AI" },
   ];
 
   // Project-Technology mapping with language percentages (demo data)
@@ -208,16 +210,24 @@ const TechStack = () => {
                         <h3 className="font-bold text-white mb-2">
                           {tech.name}
                         </h3>
-                        <div className="text-3xl font-bold gradient-text mb-2">
+                        <div className="text-4xl font-bold gradient-text mb-1">
                           {tech.proficiency}%
                         </div>
-                        <p className="text-sm text-gray-400">
+                        <p className="text-xs text-gray-400 mb-2">
                           Proficiency Level
                         </p>
 
+                        {/* Show project count on hover if available */}
+                        {projectTechUsage[tech.name] && (
+                          <p className="text-xs text-accent-cyan font-mono">
+                            Used in {projectTechUsage[tech.name].length} project
+                            {projectTechUsage[tech.name].length > 1 ? "s" : ""}
+                          </p>
+                        )}
+
                         {/* Animated Circle Progress */}
                         <svg
-                          className="absolute inset-0 w-full h-full -rotate-90"
+                          className="absolute inset-0 w-full h-full -rotate-90 pointer-events-none"
                           viewBox="0 0 100 100"
                         >
                           <circle
