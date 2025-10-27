@@ -10,16 +10,16 @@ const TechStack = () => {
     { name: "TypeScript", proficiency: 90, icon: "📘", category: "Language" },
     { name: "Node.js", proficiency: 88, icon: "🟢", category: "Backend" },
     { name: "Python", proficiency: 85, icon: "🐍", category: "Language" },
-    { name: "Next.js", proficiency: 92, icon: "▲", category: "Framework" },
+    // { name: "Next.js", proficiency: 92, icon: "▲", category: "Framework" },
     { name: "Tailwind CSS", proficiency: 95, icon: "🎨", category: "Styling" },
-    { name: "PostgreSQL", proficiency: 80, icon: "🐘", category: "Database" },
-    { name: "MongoDB", proficiency: 85, icon: "🍃", category: "Database" },
-    { name: "AWS", proficiency: 75, icon: "☁️", category: "Cloud" },
-    { name: "Docker", proficiency: 82, icon: "🐳", category: "DevOps" },
+    // { name: "PostgreSQL", proficiency: 80, icon: "🐘", category: "Database" },
+    // { name: "MongoDB", proficiency: 85, icon: "🍃", category: "Database" },
+    // { name: "AWS", proficiency: 75, icon: "☁️", category: "Cloud" },
+    // { name: "Docker", proficiency: 82, icon: "🐳", category: "DevOps" },
     { name: "Git", proficiency: 90, icon: "📦", category: "Tools" },
-    { name: "GraphQL", proficiency: 78, icon: "◈", category: "API" },
+    // { name: "GraphQL", proficiency: 78, icon: "◈", category: "API" },
     { name: "Flask", proficiency: 85, icon: "🐍", category: "Backend" },
-    { name: "Machine Learning", proficiency: 80, icon: "🤖", category: "AI" },
+    // { name: "Machine Learning", proficiency: 80, icon: "🤖", category: "AI" },
   ];
 
   // Project-Technology mapping with language percentages (demo data)
@@ -35,24 +35,24 @@ const TechStack = () => {
           { name: "HTML", percentage: 1.0, color: "#e34c26" },
         ],
       },
-      {
-        project: "AI SaaS Platform",
-        languages: [
-          { name: "TypeScript", percentage: 52.1, color: "#3178c6" },
-          { name: "JavaScript", percentage: 28.3, color: "#f1e05a" },
-          { name: "CSS", percentage: 15.6, color: "#563d7c" },
-          { name: "HTML", percentage: 4.0, color: "#e34c26" },
-        ],
-      },
-      {
-        project: "E-Commerce Dashboard",
-        languages: [
-          { name: "JavaScript", percentage: 45.2, color: "#f1e05a" },
-          { name: "TypeScript", percentage: 32.8, color: "#3178c6" },
-          { name: "CSS", percentage: 18.0, color: "#563d7c" },
-          { name: "HTML", percentage: 4.0, color: "#e34c26" },
-        ],
-      },
+      // {
+      //   project: "AI SaaS Platform",
+      //   languages: [
+      //     { name: "TypeScript", percentage: 52.1, color: "#3178c6" },
+      //     { name: "JavaScript", percentage: 28.3, color: "#f1e05a" },
+      //     { name: "CSS", percentage: 15.6, color: "#563d7c" },
+      //     { name: "HTML", percentage: 4.0, color: "#e34c26" },
+      //   ],
+      // },
+      // {
+      //   project: "E-Commerce Dashboard",
+      //   languages: [
+      //     { name: "JavaScript", percentage: 45.2, color: "#f1e05a" },
+      //     { name: "TypeScript", percentage: 32.8, color: "#3178c6" },
+      //     { name: "CSS", percentage: 18.0, color: "#563d7c" },
+      //     { name: "HTML", percentage: 4.0, color: "#e34c26" },
+      //   ],
+      // },
     ],
     TypeScript: [
       {
@@ -65,44 +65,44 @@ const TechStack = () => {
           { name: "HTML", percentage: 1.0, color: "#e34c26" },
         ],
       },
-      {
-        project: "AI SaaS Platform",
-        languages: [
-          { name: "TypeScript", percentage: 52.1, color: "#3178c6" },
-          { name: "JavaScript", percentage: 28.3, color: "#f1e05a" },
-          { name: "CSS", percentage: 15.6, color: "#563d7c" },
-          { name: "HTML", percentage: 4.0, color: "#e34c26" },
-        ],
-      },
-      {
-        project: "Design System",
-        languages: [
-          { name: "TypeScript", percentage: 68.5, color: "#3178c6" },
-          { name: "CSS", percentage: 22.1, color: "#563d7c" },
-          { name: "JavaScript", percentage: 7.4, color: "#f1e05a" },
-          { name: "HTML", percentage: 2.0, color: "#e34c26" },
-        ],
-      },
+      // {
+      //   project: "AI SaaS Platform",
+      //   languages: [
+      //     { name: "TypeScript", percentage: 52.1, color: "#3178c6" },
+      //     { name: "JavaScript", percentage: 28.3, color: "#f1e05a" },
+      //     { name: "CSS", percentage: 15.6, color: "#563d7c" },
+      //     { name: "HTML", percentage: 4.0, color: "#e34c26" },
+      //   ],
+      // },
+      // {
+      //   project: "Design System",
+      //   languages: [
+      //     { name: "TypeScript", percentage: 68.5, color: "#3178c6" },
+      //     { name: "CSS", percentage: 22.1, color: "#563d7c" },
+      //     { name: "JavaScript", percentage: 7.4, color: "#f1e05a" },
+      //     { name: "HTML", percentage: 2.0, color: "#e34c26" },
+      //   ],
+      // },
     ],
-    "Node.js": [
-      {
-        project: "AI SaaS Platform",
-        languages: [
-          { name: "TypeScript", percentage: 52.1, color: "#3178c6" },
-          { name: "JavaScript", percentage: 28.3, color: "#f1e05a" },
-          { name: "CSS", percentage: 15.6, color: "#563d7c" },
-          { name: "HTML", percentage: 4.0, color: "#e34c26" },
-        ],
-      },
-      {
-        project: "E-Commerce Dashboard",
-        languages: [
-          { name: "JavaScript", percentage: 58.9, color: "#f1e05a" },
-          { name: "TypeScript", percentage: 35.1, color: "#3178c6" },
-          { name: "Shell", percentage: 6.0, color: "#89e051" },
-        ],
-      },
-    ],
+    // "Node.js": [
+    //   {
+    //     project: "AI SaaS Platform",
+    //     languages: [
+    //       { name: "TypeScript", percentage: 52.1, color: "#3178c6" },
+    //       { name: "JavaScript", percentage: 28.3, color: "#f1e05a" },
+    //       { name: "CSS", percentage: 15.6, color: "#563d7c" },
+    //       { name: "HTML", percentage: 4.0, color: "#e34c26" },
+    //     ],
+    //   },
+    //   {
+    //     project: "E-Commerce Dashboard",
+    //     languages: [
+    //       { name: "JavaScript", percentage: 58.9, color: "#f1e05a" },
+    //       { name: "TypeScript", percentage: 35.1, color: "#3178c6" },
+    //       { name: "Shell", percentage: 6.0, color: "#89e051" },
+    //     ],
+    //   },
+    // ],
     Python: [
       {
         project: "Python Static Code Analyzer",
@@ -114,14 +114,14 @@ const TechStack = () => {
           { name: "HTML", percentage: 1.0, color: "#e34c26" },
         ],
       },
-      {
-        project: "Data Analysis Tool",
-        languages: [
-          { name: "Python", percentage: 87.3, color: "#3572A5" },
-          { name: "Jupyter Notebook", percentage: 10.2, color: "#DA5B0B" },
-          { name: "Shell", percentage: 2.5, color: "#89e051" },
-        ],
-      },
+      // {
+      //   project: "Data Analysis Tool",
+      //   languages: [
+      //     { name: "Python", percentage: 87.3, color: "#3572A5" },
+      //     { name: "Jupyter Notebook", percentage: 10.2, color: "#DA5B0B" },
+      //     { name: "Shell", percentage: 2.5, color: "#89e051" },
+      //   ],
+      // },
     ],
     Flask: [
       {
@@ -134,34 +134,34 @@ const TechStack = () => {
         ],
       },
     ],
-    MongoDB: [
-      {
-        project: "E-Commerce Dashboard",
-        languages: [
-          { name: "JavaScript", percentage: 58.9, color: "#f1e05a" },
-          { name: "TypeScript", percentage: 35.1, color: "#3178c6" },
-          { name: "Shell", percentage: 6.0, color: "#89e051" },
-        ],
-      },
-      {
-        project: "Social Media App",
-        languages: [
-          { name: "JavaScript", percentage: 62.4, color: "#f1e05a" },
-          { name: "TypeScript", percentage: 30.1, color: "#3178c6" },
-          { name: "CSS", percentage: 7.5, color: "#563d7c" },
-        ],
-      },
-    ],
-    Docker: [
-      {
-        project: "AI SaaS Platform",
-        languages: [
-          { name: "TypeScript", percentage: 52.1, color: "#3178c6" },
-          { name: "JavaScript", percentage: 28.3, color: "#f1e05a" },
-          { name: "Dockerfile", percentage: 2.5, color: "#384d54" },
-        ],
-      },
-    ],
+    // MongoDB: [
+    //   {
+    //     project: "E-Commerce Dashboard",
+    //     languages: [
+    //       { name: "JavaScript", percentage: 58.9, color: "#f1e05a" },
+    //       { name: "TypeScript", percentage: 35.1, color: "#3178c6" },
+    //       { name: "Shell", percentage: 6.0, color: "#89e051" },
+    //     ],
+    //   },
+    //   {
+    //     project: "Social Media App",
+    //     languages: [
+    //       { name: "JavaScript", percentage: 62.4, color: "#f1e05a" },
+    //       { name: "TypeScript", percentage: 30.1, color: "#3178c6" },
+    //       { name: "CSS", percentage: 7.5, color: "#563d7c" },
+    //     ],
+    //   },
+    // ],
+    // Docker: [
+    //   {
+    //     project: "AI SaaS Platform",
+    //     languages: [
+    //       { name: "TypeScript", percentage: 52.1, color: "#3178c6" },
+    //       { name: "JavaScript", percentage: 28.3, color: "#f1e05a" },
+    //       { name: "Dockerfile", percentage: 2.5, color: "#384d54" },
+    //     ],
+    //   },
+    // ],
   };
 
   const categories = [...new Set(technologies.map((tech) => tech.category))];
