@@ -26,6 +26,16 @@ const TechStack = () => {
   const projectTechUsage = {
     React: [
       {
+        project: "Python Static Code Analyzer",
+        languages: [
+          { name: "Python", percentage: 65.4, color: "#3572A5" },
+          { name: "TypeScript", percentage: 18.2, color: "#3178c6" },
+          { name: "JavaScript", percentage: 12.1, color: "#f1e05a" },
+          { name: "CSS", percentage: 3.3, color: "#563d7c" },
+          { name: "HTML", percentage: 1.0, color: "#e34c26" },
+        ],
+      },
+      {
         project: "AI SaaS Platform",
         languages: [
           { name: "TypeScript", percentage: 52.1, color: "#3178c6" },
@@ -45,6 +55,16 @@ const TechStack = () => {
       },
     ],
     TypeScript: [
+      {
+        project: "Python Static Code Analyzer",
+        languages: [
+          { name: "Python", percentage: 65.4, color: "#3572A5" },
+          { name: "TypeScript", percentage: 18.2, color: "#3178c6" },
+          { name: "JavaScript", percentage: 12.1, color: "#f1e05a" },
+          { name: "CSS", percentage: 3.3, color: "#563d7c" },
+          { name: "HTML", percentage: 1.0, color: "#e34c26" },
+        ],
+      },
       {
         project: "AI SaaS Platform",
         languages: [
@@ -85,11 +105,32 @@ const TechStack = () => {
     ],
     Python: [
       {
+        project: "Python Static Code Analyzer",
+        languages: [
+          { name: "Python", percentage: 65.4, color: "#3572A5" },
+          { name: "TypeScript", percentage: 18.2, color: "#3178c6" },
+          { name: "JavaScript", percentage: 12.1, color: "#f1e05a" },
+          { name: "CSS", percentage: 3.3, color: "#563d7c" },
+          { name: "HTML", percentage: 1.0, color: "#e34c26" },
+        ],
+      },
+      {
         project: "Data Analysis Tool",
         languages: [
           { name: "Python", percentage: 87.3, color: "#3572A5" },
           { name: "Jupyter Notebook", percentage: 10.2, color: "#DA5B0B" },
           { name: "Shell", percentage: 2.5, color: "#89e051" },
+        ],
+      },
+    ],
+    Flask: [
+      {
+        project: "Python Static Code Analyzer",
+        languages: [
+          { name: "Python", percentage: 65.4, color: "#3572A5" },
+          { name: "TypeScript", percentage: 18.2, color: "#3178c6" },
+          { name: "JavaScript", percentage: 12.1, color: "#f1e05a" },
+          { name: "CSS", percentage: 3.3, color: "#563d7c" },
         ],
       },
     ],

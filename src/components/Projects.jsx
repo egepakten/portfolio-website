@@ -23,135 +23,37 @@ const Projects = () => {
 
   const projects = [
     {
-      title: "AI SaaS Platform",
+      title: "Python Static Code Analyzer",
       description:
-        "A cutting-edge SaaS platform powered by AI that helps businesses automate their workflows and increase productivity.",
-      code: `// AI-powered workflow automation
-const analyzeWorkflow = async (data) => {
-  const model = await openai.complete({
-    prompt: "Optimize workflow...",
-    temperature: 0.7
-  });
-  return model.optimizations;
-};`,
-      demoImage: null, // Replace with your screenshot URL
-      demoGradient: "from-purple-500 via-pink-500 to-rose-500",
-      technologies: ["Next.js", "OpenAI", "Prisma", "PostgreSQL"],
-      liveLink: "https://github.com/egepakten", // Replace with your live demo URL
-      githubLink: "https://github.com/egepakten", // Replace with your GitHub repo URL
-      status: "PRODUCTION",
-      year: "2025",
-    },
-    {
-      title: "E-Commerce Dashboard",
-      description:
-        "Comprehensive admin dashboard with real-time analytics, inventory management, and customer insights.",
-      code: `// Real-time analytics engine
-app.get('/api/analytics', async (req, res) => {
-  const metrics = await Analytics
-    .aggregate([
-      { $match: { date: today } },
-      { $group: { _id: "$product" } }
-    ]);
-  res.json(metrics);
-});`,
-      demoImage: null, // Replace with your screenshot URL
-      demoGradient: "from-cyan-500 via-blue-500 to-indigo-500",
-      demoType: "login", // Special type for login demo
-      demoUrl: "https://www.wiseuni.co.uk/", // Reference URL
-      technologies: ["React", "Node.js", "MongoDB", "Chart.js"],
-      liveLink: "https://github.com/egepakten", // Replace with your live demo URL
-      githubLink: "https://github.com/egepakten", // Replace with your GitHub repo URL
-      status: "PRODUCTION",
-      year: "2025",
-    },
-    {
-      title: "Social Media App",
-      description:
-        "Modern social platform with real-time messaging, stories, and content sharing capabilities.",
-      code: `// Real-time messaging with Socket.io
-socket.on('message', (data) => {
-  const message = {
-    user: data.userId,
-    content: encrypt(data.text),
-    timestamp: Date.now()
-  };
-  io.emit('newMessage', message);
-});`,
-      demoImage: null, // Replace with your screenshot URL
-      demoGradient: "from-green-500 via-emerald-500 to-teal-500",
-      technologies: ["React Native", "Firebase", "Redux", "Socket.io"],
-      liveLink: "https://github.com/egepakten", // Replace with your live demo URL
-      githubLink: "https://github.com/egepakten", // Replace with your GitHub repo URL
-      status: "DEVELOPMENT",
-      year: "2025",
-    },
-    {
-      title: "Crypto Portfolio Tracker",
-      description:
-        "Real-time cryptocurrency portfolio tracker with price alerts and market analysis.",
-      code: `// Crypto price monitoring
-const trackPrices = async () => {
-  const prices = await fetch(
-    'https://api.coingecko.com/api/v3/coins'
-  );
-  const alerts = checkAlerts(prices);
-  await notifyUsers(alerts);
-};`,
-      demoImage: null, // Replace with your screenshot URL
-      demoGradient: "from-yellow-500 via-orange-500 to-red-500",
-      technologies: ["Vue.js", "Express", "Redis", "CoinGecko API"],
-      liveLink: "https://github.com/egepakten", // Replace with your live demo URL
-      githubLink: "https://github.com/egepakten", // Replace with your GitHub repo URL
+        "Advanced code quality analysis tool for Python developers. Kings College London Final Year Individual Project featuring drag-and-drop file upload, 13 analysis components, and comprehensive code quality reporting.",
+      code: `# AST-based code analysis
+def analyze_function_length(tree):
+  """Analyzes functions for excessive length"""
+  for node in ast.walk(tree):
+    if isinstance(node, ast.FunctionDef):
+      length = node.end_lineno - node.lineno
+      if length > 50:
+        yield {
+          'function': node.name,
+          'lines': length,
+          'recommendation': 'Consider refactoring'
+        }`,
+      demoImage: "https://static-code-analyser-iota.vercel.app/og-image.png", // Screenshot of the live site
+      demoGradient: "from-violet-600 via-purple-600 to-indigo-600",
+      demoType: "live-demo", // Special type for live demo preview
+      demoUrl: "https://static-code-analyser-iota.vercel.app",
+      technologies: [
+        "Python",
+        "Flask",
+        "React",
+        "Next.js",
+        "TypeScript",
+        "AST",
+      ],
+      liveLink: "https://static-code-analyser-iota.vercel.app", // Live demo on Vercel
+      githubLink: "https://github.com/egepakten/static-code-analyser",
       status: "PRODUCTION",
       year: "2024",
-    },
-    {
-      title: "Design System",
-      description:
-        "Comprehensive component library and design system for building consistent user interfaces.",
-      code: `// Component library export
-export const Button = ({ 
-  variant, size, children 
-}) => {
-  const classes = clsx(
-    baseStyles[variant],
-    sizeStyles[size]
-  );
-  return <button className={classes}>
-    {children}
-  </button>;
-};`,
-      demoImage: null, // Replace with your screenshot URL
-      demoGradient: "from-red-500 via-pink-500 to-fuchsia-500",
-      technologies: ["React", "Storybook", "Tailwind", "TypeScript"],
-      liveLink: "https://github.com/egepakten", // Replace with your live demo URL
-      githubLink: "https://github.com/egepakten", // Replace with your GitHub repo URL
-      status: "PRODUCTION",
-      year: "2024",
-    },
-    {
-      title: "Task Management Tool",
-      description:
-        "Collaborative project management tool with kanban boards, time tracking, and team chat.",
-      code: `// Task state management
-@Injectable()
-export class TaskService {
-  async moveTask(id: string, status: Status) {
-    await this.taskRepository.update(id, {
-      status,
-      updatedAt: new Date()
-    });
-    this.gateway.broadcast('taskMoved', id);
-  }
-}`,
-      demoImage: null, // Replace with your screenshot URL
-      demoGradient: "from-indigo-500 via-purple-500 to-violet-500",
-      technologies: ["Angular", "NestJS", "PostgreSQL", "WebSockets"],
-      liveLink: "https://github.com/egepakten", // Replace with your live demo URL
-      githubLink: "https://github.com/egepakten", // Replace with your GitHub repo URL
-      status: "DEVELOPMENT",
-      year: "2025",
     },
   ];
 
@@ -179,154 +81,180 @@ export class TaskService {
     );
   };
 
-  // Clear all filters
-  const clearFilters = () => {
-    setSelectedFilters([]);
-  };
-
   return (
-    <section
-      id="projects"
-      className="min-h-screen flex items-center justify-center px-6 lg:px-20 py-20"
-    >
-      <div className="max-w-7xl w-full">
+    <section className="py-20 relative overflow-hidden" id="projects">
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-gradient-to-b from-navy-light via-navy-dark to-navy-light opacity-50" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(100,255,218,0.05),transparent_50%)]" />
+
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl lg:text-5xl font-bold mb-8 flex items-center">
-            <span className="text-accent-cyan font-mono mr-4">03.</span>
-            Projects
-            <div className="ml-8 h-[1px] flex-1 bg-gradient-to-r from-accent-cyan/50 to-transparent" />
-          </h2>
-
-          {/* Project Count */}
-          <div className="text-center mb-6">
-            <p className="text-gray-400 text-sm">
-              Total projects: {filteredProjects.length}
+          {/* Section Header */}
+          <div className="text-center mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-block"
+            >
+              <span className="text-accent-cyan font-mono text-sm mb-2 block">
+                03. Portfolio
+              </span>
+              <h2 className="text-4xl md:text-5xl font-bold mb-4">
+                Featured Projects
+              </h2>
+              <div className="h-1 w-20 bg-accent-cyan mx-auto" />
+            </motion.div>
+            <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
+              A showcase of my work spanning full-stack development, AI
+              integration, and modern web technologies
             </p>
           </div>
 
-          {/* Filter Section */}
+          {/* Technology Filter Tags */}
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
-            className="glass rounded-lg p-6 mb-8"
+            transition={{ delay: 0.2 }}
+            className="flex flex-wrap justify-center gap-2 mb-12"
           >
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2">
-                <svg
-                  className="w-5 h-5 text-accent-cyan"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
-                  />
-                </svg>
-                <h3 className="text-lg font-semibold text-accent-cyan">
-                  Filter by tags
-                </h3>
-              </div>
-              {selectedFilters.length > 0 && (
-                <button
-                  onClick={clearFilters}
-                  className="text-sm text-gray-400 hover:text-accent-cyan transition-colors underline"
-                >
-                  Clear all
-                </button>
-              )}
-            </div>
-
-            <div className="flex flex-wrap gap-2">
-              {allTechnologies.map((tech) => (
-                <button
-                  key={tech}
-                  onClick={() => toggleFilter(tech)}
-                  className={`px-4 py-2 rounded-lg text-sm font-mono transition-all duration-200 ${
-                    selectedFilters.includes(tech)
-                      ? "bg-accent-cyan text-navy-dark font-semibold"
-                      : "bg-accent-cyan/10 text-accent-cyan border border-accent-cyan/20 hover:bg-accent-cyan/20"
-                  }`}
-                >
-                  {tech}
-                </button>
-              ))}
-            </div>
-
-            {selectedFilters.length > 0 && (
-              <div className="mt-4 pt-4 border-t border-accent-cyan/20">
-                <p className="text-sm text-gray-400">
-                  Active filters:{" "}
-                  <span className="text-accent-cyan font-semibold">
-                    {selectedFilters.join(", ")}
-                  </span>
-                </p>
-              </div>
-            )}
+            {allTechnologies.map((tech) => (
+              <button
+                key={tech}
+                onClick={() => toggleFilter(tech)}
+                className={`px-4 py-2 rounded-full text-sm font-mono transition-all ${
+                  selectedFilters.includes(tech)
+                    ? "bg-accent-cyan text-navy-dark"
+                    : "bg-navy-light/50 text-gray-400 hover:bg-accent-cyan/10 hover:text-accent-cyan border border-accent-cyan/20"
+                }`}
+              >
+                {tech}
+              </button>
+            ))}
           </motion.div>
 
+          {/* Projects Grid */}
           {filteredProjects.length === 0 ? (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-center py-12"
-            >
-              <p className="text-gray-400 text-lg mb-2">
-                No projects match the selected filters
+            <div className="text-center py-20">
+              <p className="text-gray-400 text-lg">
+                No projects found with the selected technologies
               </p>
               <button
-                onClick={clearFilters}
-                className="text-accent-cyan hover:underline"
+                onClick={() => setSelectedFilters([])}
+                className="mt-4 px-6 py-2 bg-accent-cyan text-navy-dark rounded-lg hover:bg-accent-cyan/80 transition-colors"
               >
-                Clear filters
+                Clear Filters
               </button>
-            </motion.div>
+            </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {filteredProjects.map((project, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  onHoverStart={() => setHoveredIndex(index)}
-                  onHoverEnd={() => setHoveredIndex(null)}
-                  className="group relative cursor-pointer"
-                  onClick={() => window.open(project.liveLink, "_blank")}
+                  transition={{ delay: index * 0.1 }}
+                  className="group"
                 >
                   <motion.div
                     whileHover={{ y: -5 }}
-                    transition={{ duration: 0.3 }}
-                    className="glass rounded-lg overflow-hidden h-full flex flex-col border border-accent-cyan/10"
+                    className="bg-navy-light/30 backdrop-blur-sm rounded-lg overflow-hidden border border-accent-cyan/10 hover:border-accent-cyan/30 transition-all shadow-lg hover:shadow-accent-cyan/10 relative"
                   >
-                    {/* Demo Preview Section */}
-                    <div className="relative h-48 overflow-hidden">
+                    {/* Demo/Screenshot Section */}
+                    <div
+                      className="relative h-64 cursor-pointer overflow-hidden"
+                      onMouseEnter={() => setHoveredIndex(index)}
+                      onMouseLeave={() => setHoveredIndex(null)}
+                      onClick={() => {
+                        if (project.demoUrl) {
+                          window.open(project.demoUrl, "_blank");
+                        }
+                      }}
+                    >
                       {project.demoImage ? (
-                        <img
-                          src={project.demoImage}
-                          alt={`${project.title} demo`}
-                          className="w-full h-full object-cover"
-                        />
-                      ) : project.demoType === "login" ? (
-                        // Interactive Login Demo
+                        <div className="relative w-full h-full">
+                          <img
+                            src={project.demoImage}
+                            alt={`${project.title} screenshot`}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              // Fallback if image doesn't load
+                              e.target.style.display = "none";
+                              e.target.parentElement.innerHTML = `
+                                <div class="w-full h-full bg-gradient-to-br ${project.demoGradient} flex items-center justify-center">
+                                  <div class="text-white/40 text-sm font-mono">Demo Preview</div>
+                                </div>
+                              `;
+                            }}
+                          />
+                          {/* Live Demo Badge */}
+                          {project.demoType === "live-demo" && (
+                            <div className="absolute top-3 right-3 px-3 py-1.5 bg-green-500/90 backdrop-blur-sm rounded-full flex items-center gap-2 shadow-lg">
+                              <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
+                              <span className="text-white text-xs font-bold">
+                                LIVE
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                      ) : project.demoType === "live-demo" ? (
+                        // Live Demo Preview
                         <div
-                          className={`w-full h-full bg-gradient-to-br ${project.demoGradient} flex items-center justify-center p-6`}
+                          className={`w-full h-full bg-gradient-to-br ${project.demoGradient} flex items-center justify-center p-6 relative overflow-hidden`}
                         >
-                          <div className="bg-white/95 backdrop-blur-sm rounded-lg p-6 w-full max-w-[280px] shadow-2xl">
-                            <div className="text-center mb-4">
-                              <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg mx-auto mb-2 flex items-center justify-center">
+                          {/* Animated background elements */}
+                          <div className="absolute inset-0">
+                            <div className="absolute top-4 left-4 w-32 h-32 bg-white/10 rounded-full blur-2xl animate-pulse" />
+                            <div className="absolute bottom-4 right-4 w-40 h-40 bg-white/5 rounded-full blur-3xl animate-pulse delay-700" />
+                          </div>
+
+                          {/* Main content */}
+                          <div className="relative z-10 text-center">
+                            <div className="mb-4">
+                              <div className="w-20 h-20 mx-auto bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-4 border border-white/30 shadow-2xl">
                                 <svg
-                                  className="w-6 h-6 text-white"
+                                  className="w-10 h-10 text-white"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                                  />
+                                </svg>
+                              </div>
+                            </div>
+                            <h4 className="text-white text-lg font-bold mb-2">
+                              Live Demo Available
+                            </h4>
+                            <p className="text-white/80 text-xs mb-4 max-w-[200px] mx-auto">
+                              Click to try the interactive demo
+                            </p>
+                            <div className="flex items-center justify-center gap-2 text-white/60 text-[10px] font-mono">
+                              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                              <span>Deployed on Vercel</span>
+                            </div>
+                          </div>
+                        </div>
+                      ) : project.demoType === "login" ? (
+                        <div
+                          className={`w-full h-full bg-gradient-to-br ${project.demoGradient} flex items-center justify-center p-8`}
+                        >
+                          <div className="bg-white/95 backdrop-blur-md rounded-xl shadow-2xl p-6 w-full max-w-sm">
+                            <div className="text-center mb-6">
+                              <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full mx-auto mb-3 flex items-center justify-center">
+                                <svg
+                                  className="w-8 h-8 text-white"
                                   fill="none"
                                   stroke="currentColor"
                                   viewBox="0 0 24 24"
@@ -339,18 +267,18 @@ export class TaskService {
                                   />
                                 </svg>
                               </div>
-                              <h3 className="text-lg font-bold text-gray-800">
+                              <h3 className="text-xl font-bold text-gray-800 mb-1">
                                 Welcome Back
                               </h3>
                               <p className="text-xs text-gray-500">
-                                Sign in to continue
+                                Enter your credentials to continue
                               </p>
                             </div>
                             <div className="space-y-3">
                               <div>
                                 <input
-                                  type="text"
-                                  placeholder="Email or Username"
+                                  type="email"
+                                  placeholder="Email address"
                                   className="w-full px-3 py-2 text-xs bg-gray-50 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 text-gray-700"
                                   readOnly
                                 />
@@ -422,7 +350,8 @@ export class TaskService {
                           <div className="w-3 h-3 rounded-full bg-green-500/80" />
                         </div>
                         <span className="text-xs text-gray-400 font-mono ml-2">
-                          {project.title.toLowerCase().replace(/\s+/g, "-")}.js
+                          {project.title.toLowerCase().replace(/\s+/g, "-")}.
+                          {project.title.includes("Python") ? "py" : "js"}
                         </span>
                       </div>
                       <div className="flex gap-2">
