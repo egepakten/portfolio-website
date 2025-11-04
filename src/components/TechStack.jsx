@@ -1,178 +1,93 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { projects } from "../data/projects";
 
 const TechStack = () => {
   const [hoveredTech, setHoveredTech] = useState(null);
   const [selectedTech, setSelectedTech] = useState(null);
 
-  const technologies = [
-    { name: "React", proficiency: 95, icon: "⚛️", category: "Frontend" },
-    { name: "TypeScript", proficiency: 90, icon: "📘", category: "Language" },
-    { name: "Node.js", proficiency: 88, icon: "🟢", category: "Backend" },
-    { name: "Python", proficiency: 85, icon: "🐍", category: "Language" },
-    // { name: "Next.js", proficiency: 92, icon: "▲", category: "Framework" },
-    { name: "Tailwind CSS", proficiency: 95, icon: "🎨", category: "Styling" },
-    // { name: "PostgreSQL", proficiency: 80, icon: "🐘", category: "Database" },
-    // { name: "MongoDB", proficiency: 85, icon: "🍃", category: "Database" },
-    // { name: "AWS", proficiency: 75, icon: "☁️", category: "Cloud" },
-    // { name: "Docker", proficiency: 82, icon: "🐳", category: "DevOps" },
-    { name: "Git", proficiency: 90, icon: "📦", category: "Tools" },
-    // { name: "GraphQL", proficiency: 78, icon: "◈", category: "API" },
-    { name: "Flask", proficiency: 85, icon: "🐍", category: "Backend" },
-    { name: "Machine Learning", proficiency: 80, icon: "🤖", category: "AI" },
-  ];
-
-  // Project-Technology mapping with language percentages (demo data)
-  const projectTechUsage = {
-    React: [
-      {
-        project: "Python Static Code Analyzer",
-        languages: [
-          { name: "Python", percentage: 65.4, color: "#3572A5" },
-          { name: "TypeScript", percentage: 18.2, color: "#3178c6" },
-          { name: "JavaScript", percentage: 12.1, color: "#f1e05a" },
-          { name: "CSS", percentage: 3.3, color: "#563d7c" },
-          { name: "HTML", percentage: 1.0, color: "#e34c26" },
-        ],
-      },
-      // {
-      //   project: "AI SaaS Platform",
-      //   languages: [
-      //     { name: "TypeScript", percentage: 52.1, color: "#3178c6" },
-      //     { name: "JavaScript", percentage: 28.3, color: "#f1e05a" },
-      //     { name: "CSS", percentage: 15.6, color: "#563d7c" },
-      //     { name: "HTML", percentage: 4.0, color: "#e34c26" },
-      //   ],
-      // },
-      // {
-      //   project: "E-Commerce Dashboard",
-      //   languages: [
-      //     { name: "JavaScript", percentage: 45.2, color: "#f1e05a" },
-      //     { name: "TypeScript", percentage: 32.8, color: "#3178c6" },
-      //     { name: "CSS", percentage: 18.0, color: "#563d7c" },
-      //     { name: "HTML", percentage: 4.0, color: "#e34c26" },
-      //   ],
-      // },
-    ],
-    TypeScript: [
-      {
-        project: "Python Static Code Analyzer",
-        languages: [
-          { name: "Python", percentage: 65.4, color: "#3572A5" },
-          { name: "TypeScript", percentage: 18.2, color: "#3178c6" },
-          { name: "JavaScript", percentage: 12.1, color: "#f1e05a" },
-          { name: "CSS", percentage: 3.3, color: "#563d7c" },
-          { name: "HTML", percentage: 1.0, color: "#e34c26" },
-        ],
-      },
-      // {
-      //   project: "AI SaaS Platform",
-      //   languages: [
-      //     { name: "TypeScript", percentage: 52.1, color: "#3178c6" },
-      //     { name: "JavaScript", percentage: 28.3, color: "#f1e05a" },
-      //     { name: "CSS", percentage: 15.6, color: "#563d7c" },
-      //     { name: "HTML", percentage: 4.0, color: "#e34c26" },
-      //   ],
-      // },
-      // {
-      //   project: "Design System",
-      //   languages: [
-      //     { name: "TypeScript", percentage: 68.5, color: "#3178c6" },
-      //     { name: "CSS", percentage: 22.1, color: "#563d7c" },
-      //     { name: "JavaScript", percentage: 7.4, color: "#f1e05a" },
-      //     { name: "HTML", percentage: 2.0, color: "#e34c26" },
-      //   ],
-      // },
-    ],
-    // "Node.js": [
-    //   {
-    //     project: "AI SaaS Platform",
-    //     languages: [
-    //       { name: "TypeScript", percentage: 52.1, color: "#3178c6" },
-    //       { name: "JavaScript", percentage: 28.3, color: "#f1e05a" },
-    //       { name: "CSS", percentage: 15.6, color: "#563d7c" },
-    //       { name: "HTML", percentage: 4.0, color: "#e34c26" },
-    //     ],
-    //   },
-    //   {
-    //     project: "E-Commerce Dashboard",
-    //     languages: [
-    //       { name: "JavaScript", percentage: 58.9, color: "#f1e05a" },
-    //       { name: "TypeScript", percentage: 35.1, color: "#3178c6" },
-    //       { name: "Shell", percentage: 6.0, color: "#89e051" },
-    //     ],
-    //   },
-    // ],
-    Python: [
-      {
-        project: "Python Static Code Analyzer",
-        languages: [
-          { name: "Python", percentage: 65.4, color: "#3572A5" },
-          { name: "TypeScript", percentage: 18.2, color: "#3178c6" },
-          { name: "JavaScript", percentage: 12.1, color: "#f1e05a" },
-          { name: "CSS", percentage: 3.3, color: "#563d7c" },
-          { name: "HTML", percentage: 1.0, color: "#e34c26" },
-        ],
-      },
-      {
-        project: "Pacman Q-Learning Agent",
-        languages: [{ name: "Python", percentage: 100.0, color: "#3572A5" }],
-      },
-      // {
-      //   project: "Data Analysis Tool",
-      //   languages: [
-      //     { name: "Python", percentage: 87.3, color: "#3572A5" },
-      //     { name: "Jupyter Notebook", percentage: 10.2, color: "#DA5B0B" },
-      //     { name: "Shell", percentage: 2.5, color: "#89e051" },
-      //   ],
-      // },
-    ],
-    Flask: [
-      {
-        project: "Python Static Code Analyzer",
-        languages: [
-          { name: "Python", percentage: 65.4, color: "#3572A5" },
-          { name: "TypeScript", percentage: 18.2, color: "#3178c6" },
-          { name: "JavaScript", percentage: 12.1, color: "#f1e05a" },
-          { name: "CSS", percentage: 3.3, color: "#563d7c" },
-        ],
-      },
-    ],
-    // MongoDB: [
-    //   {
-    //     project: "E-Commerce Dashboard",
-    //     languages: [
-    //       { name: "JavaScript", percentage: 58.9, color: "#f1e05a" },
-    //       { name: "TypeScript", percentage: 35.1, color: "#3178c6" },
-    //       { name: "Shell", percentage: 6.0, color: "#89e051" },
-    //     ],
-    //   },
-    //   {
-    //     project: "Social Media App",
-    //     languages: [
-    //       { name: "JavaScript", percentage: 62.4, color: "#f1e05a" },
-    //       { name: "TypeScript", percentage: 30.1, color: "#3178c6" },
-    //       { name: "CSS", percentage: 7.5, color: "#563d7c" },
-    //     ],
-    //   },
-    // ],
-    // Docker: [
-    //   {
-    //     project: "AI SaaS Platform",
-    //     languages: [
-    //       { name: "TypeScript", percentage: 52.1, color: "#3178c6" },
-    //       { name: "JavaScript", percentage: 28.3, color: "#f1e05a" },
-    //       { name: "Dockerfile", percentage: 2.5, color: "#384d54" },
-    //     ],
-    //   },
-    // ],
-    "Machine Learning": [
-      {
-        project: "Pacman Q-Learning Agent",
-        languages: [{ name: "Python", percentage: 100.0, color: "#3572A5" }],
-      },
-    ],
+  // Technology metadata (icons and categories)
+  const techMetadata = {
+    React: { icon: "⚛️", category: "Frontend" },
+    TypeScript: { icon: "📘", category: "Language" },
+    "Node.js": { icon: "🟢", category: "Backend" },
+    Python: { icon: "🐍", category: "Language" },
+    "Next.js": { icon: "▲", category: "Framework" },
+    "Tailwind CSS": { icon: "🎨", category: "Styling" },
+    PostgreSQL: { icon: "🐘", category: "Database" },
+    MongoDB: { icon: "🍃", category: "Database" },
+    AWS: { icon: "☁️", category: "Cloud" },
+    Docker: { icon: "🐳", category: "DevOps" },
+    Git: { icon: "📦", category: "Tools" },
+    GraphQL: { icon: "◈", category: "API" },
+    Flask: { icon: "🐍", category: "Backend" },
+    "Machine Learning": { icon: "🤖", category: "AI" },
+    "Q-Learning": { icon: "🎓", category: "AI" },
+    "Reinforcement Learning": { icon: "🤖", category: "AI" },
+    AST: { icon: "🌳", category: "Tools" },
+    JavaScript: { icon: "📜", category: "Language" },
   };
+
+  // Dynamically generate technologies from projects
+  const technologies = useMemo(() => {
+    const techMap = new Map();
+
+    projects.forEach((project) => {
+      project.technologies.forEach((tech) => {
+        if (!techMap.has(tech)) {
+          techMap.set(tech, {
+            name: tech,
+            icon: techMetadata[tech]?.icon || "💻",
+            category: techMetadata[tech]?.category || "Other",
+            projectCount: 0,
+          });
+        }
+        const techData = techMap.get(tech);
+        techData.projectCount += 1;
+      });
+    });
+
+    return Array.from(techMap.values());
+  }, []);
+
+  // Dynamically generate project-technology mapping
+  const projectTechUsage = useMemo(() => {
+    const techProjects = {};
+
+    // Language color mapping
+    const languageColors = {
+      Python: "#3572A5",
+      TypeScript: "#3178c6",
+      JavaScript: "#f1e05a",
+      CSS: "#563d7c",
+      HTML: "#e34c26",
+      Shell: "#89e051",
+      "Jupyter Notebook": "#DA5B0B",
+      Dockerfile: "#384d54",
+    };
+
+    projects.forEach((project) => {
+      project.technologies.forEach((tech) => {
+        if (!techProjects[tech]) {
+          techProjects[tech] = [];
+        }
+
+        // Create language breakdown based on project technologies
+        const languages = project.technologies.map((t) => ({
+          name: t,
+          percentage: (100 / project.technologies.length).toFixed(1),
+          color: languageColors[t] || "#888888",
+        }));
+
+        techProjects[tech].push({
+          project: project.title,
+          languages: languages,
+        });
+      });
+    });
+
+    return techProjects;
+  }, []);
 
   const categories = [...new Set(technologies.map((tech) => tech.category))];
 
@@ -196,9 +111,7 @@ const TechStack = () => {
 
           {/* Hint */}
           <p className="text-gray-400 text-center mb-8">
-            💡 Click on technologies with a{" "}
-            <span className="inline-block w-2 h-2 bg-accent-cyan rounded-full animate-pulse mx-1" />
-            to see project language breakdowns
+            💡 Click on any technology to see which projects use it
           </p>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -228,27 +141,16 @@ const TechStack = () => {
                   </span>
 
                   {/* Project count badge */}
-                  {projectTechUsage[tech.name] && (
-                    <span className="mt-2 text-[10px] text-gray-400 font-mono">
-                      {projectTechUsage[tech.name].length} project
-                      {projectTechUsage[tech.name].length > 1 ? "s" : ""}
-                    </span>
-                  )}
-
-                  {/* Proficiency Indicator */}
-                  <div className="w-full mt-4">
-                    <div className="h-1 bg-navy-light rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${tech.proficiency}%` }}
-                        transition={{ duration: 1, delay: index * 0.05 }}
-                        viewport={{ once: true }}
-                        className="h-full bg-gradient-to-r from-accent-cyan to-accent-teal"
-                      />
+                  <div className="mt-4">
+                    <div className="text-3xl font-bold gradient-text mb-1">
+                      {tech.projectCount}
                     </div>
+                    <p className="text-xs text-gray-400">
+                      Project{tech.projectCount > 1 ? "s" : ""}
+                    </p>
                   </div>
 
-                  {/* Hover Overlay with Animated Progress */}
+                  {/* Hover Overlay - Simplified */}
                   <AnimatePresence>
                     {hoveredTech === index && (
                       <motion.div
@@ -257,54 +159,17 @@ const TechStack = () => {
                         exit={{ opacity: 0, scale: 0.8 }}
                         className="absolute inset-0 glass rounded-lg border-2 border-accent-cyan flex flex-col items-center justify-center p-4 z-10"
                       >
-                        <div className="text-4xl mb-3">{tech.icon}</div>
-                        <h3 className="font-bold text-white mb-2">
+                        <div className="text-5xl mb-3">{tech.icon}</div>
+                        <h3 className="font-bold text-white mb-2 text-lg">
                           {tech.name}
                         </h3>
-                        <div className="text-4xl font-bold gradient-text mb-1">
-                          {tech.proficiency}%
-                        </div>
-                        <p className="text-xs text-gray-400 mb-2">
-                          Proficiency Level
-                        </p>
 
-                        {/* Show project count on hover if available */}
+                        {/* Show click hint */}
                         {projectTechUsage[tech.name] && (
-                          <p className="text-xs text-accent-cyan font-mono">
-                            Used in {projectTechUsage[tech.name].length} project
-                            {projectTechUsage[tech.name].length > 1 ? "s" : ""}
+                          <p className="text-sm text-accent-cyan font-mono text-center">
+                            Click to see projects
                           </p>
                         )}
-
-                        {/* Animated Circle Progress */}
-                        <svg
-                          className="absolute inset-0 w-full h-full -rotate-90 pointer-events-none"
-                          viewBox="0 0 100 100"
-                        >
-                          <circle
-                            cx="50"
-                            cy="50"
-                            r="45"
-                            fill="none"
-                            stroke="rgba(100, 255, 218, 0.1)"
-                            strokeWidth="2"
-                          />
-                          <motion.circle
-                            cx="50"
-                            cy="50"
-                            r="45"
-                            fill="none"
-                            stroke="#64ffda"
-                            strokeWidth="2"
-                            strokeDasharray={`${2 * Math.PI * 45}`}
-                            initial={{ strokeDashoffset: 2 * Math.PI * 45 }}
-                            animate={{
-                              strokeDashoffset:
-                                2 * Math.PI * 45 * (1 - tech.proficiency / 100),
-                            }}
-                            transition={{ duration: 1 }}
-                          />
-                        </svg>
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -353,7 +218,11 @@ const TechStack = () => {
                         {selectedTech}
                       </h3>
                       <p className="text-gray-400 text-sm">
-                        Projects using this technology
+                        {projectTechUsage[selectedTech]?.length || 0} project
+                        {projectTechUsage[selectedTech]?.length !== 1
+                          ? "s"
+                          : ""}{" "}
+                        using this technology
                       </p>
                     </div>
                     <button

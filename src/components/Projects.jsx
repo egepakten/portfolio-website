@@ -137,7 +137,7 @@ const Projects = () => {
                   >
                     {/* Demo/Screenshot Section */}
                     <div
-                      className="relative h-64 cursor-pointer overflow-hidden"
+                      className="relative h-80 cursor-pointer overflow-hidden"
                       onMouseEnter={() => setHoveredIndex(index)}
                       onMouseLeave={() => setHoveredIndex(null)}
                       onClick={() => {

@@ -22,7 +22,7 @@ def analyze_function_length(tree):
           'lines': length,
           'recommendation': 'Consider refactoring'
         }`,
-    demoImage: "https://static-code-analyser-iota.vercel.app/og-image.png",
+    demoImage: "/screenshots/static_code_analyser_screen_image.jpeg",
     demoGradient: "from-violet-600 via-purple-600 to-indigo-600",
     demoType: "live-demo",
     demoUrl: "https://static-code-analyser-iota.vercel.app",
