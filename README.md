@@ -1,4 +1,4 @@
-# Artistic Portfolio Website
+# Portfolio Website
 
 A modern, artistic portfolio website built with React and Tailwind CSS featuring stunning animations and interactive elements.
 
