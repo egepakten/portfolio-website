@@ -48,9 +48,8 @@ def learn(self, state, action, reward, nextState):
   )
   
   self.updateQValue(state, action, newQ)`,
-    demoImage:
-      "https://raw.githubusercontent.com/egepakten/pacman-ai-qlearning/master/pacman_demo.png",
-    demoGradient: "from-yellow-500 via-blue-600 to-indigo-700",
+    demoImage: "/screenshots/pacman.png?v=2",
+    demoGradient: "from-black to-black",
     demoType: "game",
     demoUrl: null,
     technologies: [

@@ -147,11 +147,21 @@ const Projects = () => {
                       }}
                     >
                       {project.demoImage ? (
-                        <div className="relative w-full h-full">
+                        <div
+                          className={`relative w-full h-full ${
+                            project.demoType === "game"
+                              ? "bg-black flex items-center justify-center"
+                              : ""
+                          }`}
+                        >
                           <img
                             src={project.demoImage}
                             alt={`${project.title} screenshot`}
-                            className="w-full h-full object-cover"
+                            className={`${
+                              project.demoType === "game"
+                                ? "max-h-full max-w-full object-contain"
+                                : "w-full h-full object-cover"
+                            }`}
                             onError={(e) => {
                               // Fallback if image doesn't load
                               e.target.style.display = "none";
