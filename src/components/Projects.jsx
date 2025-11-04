@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
+import { projects } from "../data/projects";
 
 /**
  * Projects Component
@@ -15,47 +16,14 @@ import { motion } from "framer-motion";
  *   demoImage: "https://your-domain.com/demo.png"
  *
  * Until you add images, colorful gradient placeholders will be displayed.
+ *
+ * Note: Projects are now imported from src/data/projects.js
+ * This ensures the project count stays synchronized across components.
  */
 
 const Projects = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [selectedFilters, setSelectedFilters] = useState([]);
-
-  const projects = [
-    {
-      title: "Python Static Code Analyzer",
-      description:
-        "Advanced code quality analysis tool for Python developers. Kings College London Final Year Individual Project featuring drag-and-drop file upload, 13 analysis components, and comprehensive code quality reporting.",
-      code: `# AST-based code analysis
-def analyze_function_length(tree):
-  """Analyzes functions for excessive length"""
-  for node in ast.walk(tree):
-    if isinstance(node, ast.FunctionDef):
-      length = node.end_lineno - node.lineno
-      if length > 50:
-        yield {
-          'function': node.name,
-          'lines': length,
-          'recommendation': 'Consider refactoring'
-        }`,
-      demoImage: "https://static-code-analyser-iota.vercel.app/og-image.png", // Screenshot of the live site
-      demoGradient: "from-violet-600 via-purple-600 to-indigo-600",
-      demoType: "live-demo", // Special type for live demo preview
-      demoUrl: "https://static-code-analyser-iota.vercel.app",
-      technologies: [
-        "Python",
-        "Flask",
-        "React",
-        "Next.js",
-        "TypeScript",
-        "AST",
-      ],
-      liveLink: "https://static-code-analyser-iota.vercel.app", // Live demo on Vercel
-      githubLink: "https://github.com/egepakten/static-code-analyser",
-      status: "PRODUCTION",
-      year: "2024",
-    },
-  ];
 
   // Get all unique technologies
   const allTechnologies = useMemo(() => {

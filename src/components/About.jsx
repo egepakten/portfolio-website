@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { projects } from "../data/projects";
 
 const About = () => {
   const [displayedText, setDisplayedText] = useState("");
@@ -88,7 +89,10 @@ const About = () => {
           {/* Additional Info Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
             {[
-              { number: "6+", label: "Projects Completed" },
+              {
+                number: projects.length.toString(),
+                label: "Projects Completed",
+              },
               { number: "4+", label: "Years Experience with Coding" },
               { number: "100%", label: "Commitment" },
             ].map((stat, index) => (

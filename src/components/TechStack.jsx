@@ -19,7 +19,7 @@ const TechStack = () => {
     { name: "Git", proficiency: 90, icon: "📦", category: "Tools" },
     // { name: "GraphQL", proficiency: 78, icon: "◈", category: "API" },
     { name: "Flask", proficiency: 85, icon: "🐍", category: "Backend" },
-    // { name: "Machine Learning", proficiency: 80, icon: "🤖", category: "AI" },
+    { name: "Machine Learning", proficiency: 80, icon: "🤖", category: "AI" },
   ];
 
   // Project-Technology mapping with language percentages (demo data)
@@ -114,6 +114,10 @@ const TechStack = () => {
           { name: "HTML", percentage: 1.0, color: "#e34c26" },
         ],
       },
+      {
+        project: "Pacman Q-Learning Agent",
+        languages: [{ name: "Python", percentage: 100.0, color: "#3572A5" }],
+      },
       // {
       //   project: "Data Analysis Tool",
       //   languages: [
@@ -162,6 +166,12 @@ const TechStack = () => {
     //     ],
     //   },
     // ],
+    "Machine Learning": [
+      {
+        project: "Pacman Q-Learning Agent",
+        languages: [{ name: "Python", percentage: 100.0, color: "#3572A5" }],
+      },
+    ],
   };
 
   const categories = [...new Set(technologies.map((tech) => tech.category))];
