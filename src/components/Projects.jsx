@@ -1,28 +1,19 @@
 import { useState, useMemo } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { projects } from "../data/projects";
 
 /**
- * Projects Component
+ * Projects Component - Carousel View
  *
- * To add demo images to your projects:
- * 1. Add your screenshot/demo image to a 'public' or 'assets' folder
- * 2. Replace 'demoImage: null' with 'demoImage: "/path/to/your/image.png"'
- *
- * Example:
- *   demoImage: "/screenshots/ai-saas-platform.png"
- *
- * You can also use external URLs:
- *   demoImage: "https://your-domain.com/demo.png"
- *
- * Until you add images, colorful gradient placeholders will be displayed.
- *
- * Note: Projects are now imported from src/data/projects.js
- * This ensures the project count stays synchronized across components.
+ * Features:
+ * - Slideshow/carousel navigation with arrows
+ * - Side-by-side layout (image left, info right)
+ * - Full code display without cutoff
+ * - Project counter showing current position
  */
 
 const Projects = () => {
-  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
   const [selectedFilters, setSelectedFilters] = useState([]);
 
   // Get all unique technologies
@@ -48,6 +39,26 @@ const Projects = () => {
       prev.includes(tech) ? prev.filter((t) => t !== tech) : [...prev, tech]
     );
   };
+
+  // Navigation functions
+  const nextProject = () => {
+    setCurrentProjectIndex((prev) =>
+      prev === filteredProjects.length - 1 ? 0 : prev + 1
+    );
+  };
+
+  const prevProject = () => {
+    setCurrentProjectIndex((prev) =>
+      prev === 0 ? filteredProjects.length - 1 : prev - 1
+    );
+  };
+
+  // Reset index when filters change
+  useMemo(() => {
+    setCurrentProjectIndex(0);
+  }, [selectedFilters]);
+
+  const currentProject = filteredProjects[currentProjectIndex];
 
   return (
     <section className="py-20 relative overflow-hidden" id="projects">
@@ -107,7 +118,7 @@ const Projects = () => {
             ))}
           </motion.div>
 
-          {/* Projects Grid */}
+          {/* Project Carousel */}
           {filteredProjects.length === 0 ? (
             <div className="text-center py-20">
               <p className="text-gray-400 text-lg">
@@ -121,314 +132,256 @@ const Projects = () => {
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {filteredProjects.map((project, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="group"
-                >
-                  <motion.div
-                    whileHover={{ y: -5 }}
-                    className="bg-navy-light/30 backdrop-blur-sm rounded-lg overflow-hidden border border-accent-cyan/10 hover:border-accent-cyan/30 transition-all shadow-lg hover:shadow-accent-cyan/10 relative"
-                  >
-                    {/* Demo/Screenshot Section */}
-                    <div
-                      className="relative h-80 cursor-pointer overflow-hidden"
-                      onMouseEnter={() => setHoveredIndex(index)}
-                      onMouseLeave={() => setHoveredIndex(null)}
-                      onClick={() => {
-                        if (project.demoUrl) {
-                          window.open(project.demoUrl, "_blank");
-                        }
-                      }}
+            <div className="relative">
+              {/* Project Counter */}
+              <div className="text-center mb-6">
+                <span className="text-accent-cyan font-mono text-sm">
+                  Project {currentProjectIndex + 1} of {filteredProjects.length}
+                </span>
+              </div>
+
+              {/* Carousel Container */}
+              <div className="relative max-w-7xl mx-auto">
+                {/* Navigation Arrows */}
+                {filteredProjects.length > 1 && (
+                  <>
+                    <button
+                      onClick={prevProject}
+                      className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-16 z-20 w-14 h-14 rounded-full bg-accent-cyan/10 hover:bg-accent-cyan/20 border-2 border-accent-cyan/30 hover:border-accent-cyan flex items-center justify-center transition-all"
+                      aria-label="Previous project"
                     >
-                      {project.demoImage ? (
-                        <div
-                          className={`relative w-full h-full ${
-                            project.demoType === "game"
-                              ? "bg-black flex items-center justify-center"
-                              : ""
-                          }`}
-                        >
-                          <img
-                            src={project.demoImage}
-                            alt={`${project.title} screenshot`}
-                            className={`${
-                              project.demoType === "game"
-                                ? "max-h-full max-w-full object-contain"
-                                : "w-full h-full object-cover"
+                      <svg
+                        className="w-7 h-7 text-accent-cyan"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2.5}
+                          d="M15 19l-7-7 7-7"
+                        />
+                      </svg>
+                    </button>
+                    <button
+                      onClick={nextProject}
+                      className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-16 z-20 w-14 h-14 rounded-full bg-accent-cyan/10 hover:bg-accent-cyan/20 border-2 border-accent-cyan/30 hover:border-accent-cyan flex items-center justify-center transition-all"
+                      aria-label="Next project"
+                    >
+                      <svg
+                        className="w-7 h-7 text-accent-cyan"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2.5}
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </button>
+                  </>
+                )}
+
+                {/* Project Card */}
+                <AnimatePresence mode="wait">
+                  {currentProject && (
+                    <motion.div
+                      key={currentProjectIndex}
+                      initial={{ opacity: 0, x: 100 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -100 }}
+                      transition={{ duration: 0.4 }}
+                      className="bg-navy-light/30 backdrop-blur-sm rounded-lg overflow-hidden border border-accent-cyan/10 hover:border-accent-cyan/30 transition-all shadow-2xl"
+                    >
+                      {/* Side-by-side Layout */}
+                      <div className="flex flex-col lg:flex-row">
+                        {/* Left Side: Demo Image */}
+                        <div className="lg:w-2/5">
+                          <div
+                            className={`relative h-96 lg:h-full cursor-pointer ${
+                              currentProject.demoType === "game"
+                                ? "bg-black flex items-center justify-center"
+                                : ""
                             }`}
-                            onError={(e) => {
-                              // Fallback if image doesn't load
-                              e.target.style.display = "none";
-                              e.target.parentElement.innerHTML = `
-                                <div class="w-full h-full bg-gradient-to-br ${project.demoGradient} flex items-center justify-center">
-                                  <div class="text-white/40 text-sm font-mono">Demo Preview</div>
-                                </div>
-                              `;
+                            onClick={() => {
+                              if (currentProject.demoUrl) {
+                                window.open(currentProject.demoUrl, "_blank");
+                              }
                             }}
-                          />
-                          {/* Live Demo Badge */}
-                          {project.demoType === "live-demo" && (
-                            <div className="absolute top-3 right-3 px-3 py-1.5 bg-green-500/90 backdrop-blur-sm rounded-full flex items-center gap-2 shadow-lg">
-                              <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
-                              <span className="text-white text-xs font-bold">
-                                LIVE
-                              </span>
-                            </div>
-                          )}
+                          >
+                            {currentProject.demoImage ? (
+                              <img
+                                src={currentProject.demoImage}
+                                alt={`${currentProject.title} screenshot`}
+                                className={`${
+                                  currentProject.demoType === "game"
+                                    ? "max-h-full max-w-full object-contain"
+                                    : "w-full h-full object-cover"
+                                }`}
+                              />
+                            ) : (
+                              <div
+                                className={`w-full h-full bg-gradient-to-br ${currentProject.demoGradient} flex items-center justify-center`}
+                              >
+                                <div className="text-white/40 text-sm font-mono">
+                                  Demo Preview
+                                </div>
+                              </div>
+                            )}
+
+                            {/* Live Badge */}
+                            {currentProject.demoType === "live-demo" && (
+                              <div className="absolute top-4 right-4 px-3 py-1.5 bg-green-500/90 backdrop-blur-sm rounded-full flex items-center gap-2 shadow-lg">
+                                <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
+                                <span className="text-white text-xs font-bold">
+                                  LIVE
+                                </span>
+                              </div>
+                            )}
+                          </div>
                         </div>
-                      ) : project.demoType === "live-demo" ? (
-                        // Live Demo Preview
-                        <div
-                          className={`w-full h-full bg-gradient-to-br ${project.demoGradient} flex items-center justify-center p-6 relative overflow-hidden`}
-                        >
-                          {/* Animated background elements */}
-                          <div className="absolute inset-0">
-                            <div className="absolute top-4 left-4 w-32 h-32 bg-white/10 rounded-full blur-2xl animate-pulse" />
-                            <div className="absolute bottom-4 right-4 w-40 h-40 bg-white/5 rounded-full blur-3xl animate-pulse delay-700" />
+
+                        {/* Right Side: Project Info */}
+                        <div className="lg:w-3/5 flex flex-col">
+                          {/* Header with Title and Status */}
+                          <div className="p-6 bg-[#1e293b]/60 backdrop-blur-sm border-b border-accent-cyan/10">
+                            <div className="flex items-start justify-between mb-4">
+                              <div className="flex-1">
+                                <h3 className="text-2xl lg:text-3xl font-bold text-white mb-2">
+                                  {currentProject.title}
+                                </h3>
+                                <p className="text-gray-400 text-sm leading-relaxed">
+                                  {currentProject.description}
+                                </p>
+                              </div>
+                              <div className="flex flex-col items-end gap-2 ml-4">
+                                <span
+                                  className={`px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap ${
+                                    currentProject.status === "PRODUCTION"
+                                      ? "bg-green-500/20 text-green-400 border border-green-500/30"
+                                      : "bg-yellow-500/20 text-yellow-400 border border-yellow-500/30"
+                                  }`}
+                                >
+                                  {currentProject.status}
+                                </span>
+                                <span className="text-sm text-gray-500 font-mono">
+                                  {currentProject.year}
+                                </span>
+                              </div>
+                            </div>
+
+                            {/* Technologies */}
+                            <div className="flex flex-wrap gap-2">
+                              {currentProject.technologies.map((tech, i) => (
+                                <span
+                                  key={i}
+                                  className="px-3 py-1 bg-accent-cyan/10 text-accent-cyan rounded-full text-xs font-mono border border-accent-cyan/20"
+                                >
+                                  {tech}
+                                </span>
+                              ))}
+                            </div>
                           </div>
 
-                          {/* Main content */}
-                          <div className="relative z-10 text-center">
-                            <div className="mb-4">
-                              <div className="w-20 h-20 mx-auto bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-4 border border-white/30 shadow-2xl">
-                                <svg
-                                  className="w-10 h-10 text-white"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  viewBox="0 0 24 24"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-                                  />
-                                </svg>
+                          {/* Code Section */}
+                          <div className="flex-1 flex flex-col">
+                            {/* Code Editor Header */}
+                            <div className="bg-[#1e293b]/80 backdrop-blur-sm px-4 py-3 flex items-center justify-between border-b border-accent-cyan/10">
+                              <div className="flex items-center gap-2">
+                                <div className="flex gap-1.5">
+                                  <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                                  <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                                  <div className="w-3 h-3 rounded-full bg-green-500/80" />
+                                </div>
+                                <span className="text-xs text-gray-400 font-mono ml-2">
+                                  {currentProject.title
+                                    .toLowerCase()
+                                    .replace(/\s+/g, "-")}
+                                  .
+                                  {currentProject.title.includes("Python")
+                                    ? "py"
+                                    : "js"}
+                                </span>
                               </div>
-                            </div>
-                            <h4 className="text-white text-lg font-bold mb-2">
-                              Live Demo Available
-                            </h4>
-                            <p className="text-white/80 text-xs mb-4 max-w-[200px] mx-auto">
-                              Click to try the interactive demo
-                            </p>
-                            <div className="flex items-center justify-center gap-2 text-white/60 text-[10px] font-mono">
-                              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                              <span>Deployed on Vercel</span>
-                            </div>
-                          </div>
-                        </div>
-                      ) : project.demoType === "login" ? (
-                        <div
-                          className={`w-full h-full bg-gradient-to-br ${project.demoGradient} flex items-center justify-center p-8`}
-                        >
-                          <div className="bg-white/95 backdrop-blur-md rounded-xl shadow-2xl p-6 w-full max-w-sm">
-                            <div className="text-center mb-6">
-                              <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full mx-auto mb-3 flex items-center justify-center">
-                                <svg
-                                  className="w-8 h-8 text-white"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  viewBox="0 0 24 24"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                                  />
-                                </svg>
-                              </div>
-                              <h3 className="text-xl font-bold text-gray-800 mb-1">
-                                Welcome Back
-                              </h3>
-                              <p className="text-xs text-gray-500">
-                                Enter your credentials to continue
-                              </p>
-                            </div>
-                            <div className="space-y-3">
-                              <div>
-                                <input
-                                  type="email"
-                                  placeholder="Email address"
-                                  className="w-full px-3 py-2 text-xs bg-gray-50 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 text-gray-700"
-                                  readOnly
-                                />
-                              </div>
-                              <div>
-                                <input
-                                  type="password"
-                                  placeholder="Password"
-                                  className="w-full px-3 py-2 text-xs bg-gray-50 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 text-gray-700"
-                                  readOnly
-                                />
-                              </div>
-                              <button className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-2 rounded-md text-xs font-semibold hover:shadow-lg transition-all">
-                                Sign In
-                              </button>
-                              <div className="flex items-center justify-between text-[10px] text-gray-500">
-                                <label className="flex items-center gap-1">
-                                  <input type="checkbox" className="w-3 h-3" />
-                                  Remember me
-                                </label>
+                              <div className="flex gap-2">
+                                {currentProject.liveLink && (
+                                  <a
+                                    href={currentProject.liveLink}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="p-1.5 hover:bg-accent-cyan/10 rounded transition-colors"
+                                  >
+                                    <svg
+                                      className="w-4 h-4 text-accent-cyan"
+                                      fill="none"
+                                      stroke="currentColor"
+                                      viewBox="0 0 24 24"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                                      />
+                                    </svg>
+                                  </a>
+                                )}
                                 <a
-                                  href="#"
-                                  className="text-cyan-600 hover:underline"
+                                  href={currentProject.githubLink}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="p-1.5 hover:bg-accent-cyan/10 rounded transition-colors"
                                 >
-                                  Forgot?
+                                  <svg
+                                    className="w-4 h-4 text-accent-cyan"
+                                    fill="currentColor"
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <path
+                                      fillRule="evenodd"
+                                      d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"
+                                      clipRule="evenodd"
+                                    />
+                                  </svg>
                                 </a>
                               </div>
                             </div>
-                          </div>
-                        </div>
-                      ) : (
-                        <div
-                          className={`w-full h-full bg-gradient-to-br ${project.demoGradient} flex items-center justify-center relative`}
-                        >
-                          {/* Placeholder content */}
-                          <div className="absolute inset-0 opacity-20">
-                            <div className="absolute top-4 left-4 right-4 h-8 bg-white/20 rounded" />
-                            <div className="absolute top-16 left-4 right-4 bottom-4 bg-white/10 rounded grid grid-cols-3 gap-2 p-2">
-                              <div className="bg-white/20 rounded" />
-                              <div className="bg-white/20 rounded" />
-                              <div className="bg-white/20 rounded" />
+
+                            {/* Code Display - Full Content */}
+                            <div className="flex-1 bg-[#0f172a]/50 p-6 font-mono text-sm overflow-y-auto">
+                              <pre className="text-gray-300 leading-relaxed">
+                                <code>{currentProject.code}</code>
+                              </pre>
                             </div>
                           </div>
-                          <div className="text-white/40 text-sm font-mono">
-                            Demo Preview
-                          </div>
-                        </div>
-                      )}
-                      {/* Overlay on hover */}
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: hoveredIndex === index ? 1 : 0 }}
-                        className="absolute inset-0 bg-navy-dark/80 backdrop-blur-sm flex items-center justify-center"
-                      >
-                        <span className="text-accent-cyan text-sm font-mono">
-                          {project.demoUrl
-                            ? "View live demo →"
-                            : "Click to view demo →"}
-                        </span>
-                      </motion.div>
-                    </div>
-
-                    {/* Code Editor Header */}
-                    <div className="bg-[#1e293b]/80 backdrop-blur-sm px-4 py-3 flex items-center justify-between border-b border-accent-cyan/10">
-                      <div className="flex items-center gap-2">
-                        <div className="flex gap-1.5">
-                          <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                          <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                          <div className="w-3 h-3 rounded-full bg-green-500/80" />
-                        </div>
-                        <span className="text-xs text-gray-400 font-mono ml-2">
-                          {project.title.toLowerCase().replace(/\s+/g, "-")}.
-                          {project.title.includes("Python") ? "py" : "js"}
-                        </span>
-                      </div>
-                      <div className="flex gap-2">
-                        <a
-                          href={project.liveLink}
-                          className="p-1 hover:bg-accent-cyan/10 rounded transition-colors"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <svg
-                            className="w-4 h-4 text-accent-cyan"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                            />
-                          </svg>
-                        </a>
-                        <a
-                          href={project.githubLink}
-                          className="p-1 hover:bg-accent-cyan/10 rounded transition-colors"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <svg
-                            className="w-4 h-4 text-accent-cyan"
-                            fill="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </a>
-                      </div>
-                    </div>
-
-                    {/* Code Display */}
-                    <div className="bg-[#0f172a]/50 p-4 font-mono text-sm overflow-hidden max-h-48">
-                      <pre className="text-gray-300 leading-relaxed text-xs">
-                        <code>{project.code}</code>
-                      </pre>
-                    </div>
-
-                    {/* Project Info */}
-                    <div className="p-4 bg-[#1e293b]/60 backdrop-blur-sm border-t border-accent-cyan/10">
-                      <div className="flex items-start justify-between mb-2">
-                        <h3 className="text-lg font-bold group-hover:text-accent-cyan transition-colors">
-                          {project.title}
-                        </h3>
-                        <div className="flex gap-2 items-center">
-                          <span
-                            className={`px-2 py-1 rounded text-[10px] font-bold ${
-                              project.status === "PRODUCTION"
-                                ? "bg-green-500/20 text-green-400 border border-green-500/30"
-                                : "bg-yellow-500/20 text-yellow-400 border border-yellow-500/30"
-                            }`}
-                          >
-                            {project.status}
-                          </span>
-                          <span className="text-xs text-gray-500 font-mono">
-                            {project.year}
-                          </span>
                         </div>
                       </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
-                      <p className="text-gray-400 text-xs mb-3 line-clamp-2">
-                        {project.description}
-                      </p>
-
-                      {/* Technologies */}
-                      <div className="flex flex-wrap gap-1.5">
-                        {project.technologies.map((tech, i) => (
-                          <span
-                            key={i}
-                            className="px-2 py-1 bg-accent-cyan/10 text-accent-cyan rounded text-[10px] font-mono border border-accent-cyan/20"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Hover Glow Effect */}
-                    <div
-                      className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
-                      style={{
-                        background:
-                          "linear-gradient(135deg, rgba(100, 255, 218, 0.05) 0%, transparent 50%)",
-                      }}
-                    />
-                  </motion.div>
-                </motion.div>
-              ))}
+                {/* Pagination Dots */}
+                {filteredProjects.length > 1 && (
+                  <div className="flex justify-center gap-2 mt-8">
+                    {filteredProjects.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setCurrentProjectIndex(index)}
+                        className={`w-2 h-2 rounded-full transition-all ${
+                          index === currentProjectIndex
+                            ? "bg-accent-cyan w-8"
+                            : "bg-accent-cyan/30 hover:bg-accent-cyan/50"
+                        }`}
+                        aria-label={`Go to project ${index + 1}`}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           )}
         </motion.div>
