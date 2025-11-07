@@ -7,6 +7,51 @@
 
 export const projects = [
   {
+    title: "Focalstreams - Social Feed",
+    description:
+      "A full-stack serverless social media platform similar to Twitter/X. Built with AWS Lambda, DynamoDB, and API Gateway for the backend, with a React TypeScript frontend. Features real-time post creation, likes, CRUD operations, and beautiful liquid glass morphism UI design.",
+    code: `# Lambda handler for creating posts
+@app.route('/posts', methods=['POST'])
+def create_post():
+  """Serverless post creation with DynamoDB"""
+  data = app.current_event.json_body
+  
+  post = {
+    'id': str(uuid.uuid4()),
+    'content': data['content'],
+    'author': data['author'],
+    'created_at': datetime.utcnow().isoformat(),
+    'likes': 0
+  }
+  
+  table.put_item(Item=post)
+  return {'statusCode': 200, 'body': post}`,
+    demoImage: "/screenshots/focalstreams.png",
+    demoGradient: "from-gray-800 via-gray-900 to-black",
+    demoType: "live-demo",
+    demoUrl: "https://focalstreams.com/",
+    technologies: [
+      "AWS Lambda",
+      "DynamoDB",
+      "API Gateway",
+      "Python",
+      "React",
+      "TypeScript",
+      "Serverless",
+    ],
+    languages: [
+      { name: "Python", percentage: 42.6, color: "#3572A5" },
+      { name: "TypeScript", percentage: 25.3, color: "#3178c6" },
+      { name: "CSS", percentage: 27.7, color: "#563d7c" },
+      { name: "Makefile", percentage: 2.6, color: "#427819" },
+      { name: "HTML", percentage: 1.8, color: "#e34c26" },
+    ],
+    liveLink: "https://focalstreams.com/",
+    githubLink: "https://github.com/egepakten/focalstreams",
+    status: "PRODUCTION",
+    year: "2025",
+  },
+  {
     title: "Python Static Code Analyzer",
     description:
       "Advanced code quality analysis tool for Python developers. Kings College London Final Year Individual Project featuring drag-and-drop file upload, 13 analysis components, and comprehensive code quality reporting.",
@@ -27,6 +72,15 @@ def analyze_function_length(tree):
     demoType: "live-demo",
     demoUrl: "https://static-code-analyser-iota.vercel.app",
     technologies: ["Python", "Flask", "React", "Next.js", "TypeScript", "AST"],
+    languages: [
+      { name: "Python", percentage: 98.7, color: "#3572A5" },
+      { name: "TypeScript", percentage: 0.5, color: "#3178c6" },
+      { name: "JavaScript", percentage: 0.3, color: "#f1e05a" },
+      { name: "CSS", percentage: 0.2, color: "#563d7c" },
+      { name: "PowerShell", percentage: 0.1, color: "#012456" },
+      { name: "C", percentage: 0.1, color: "#555555" },
+      { name: "Shell", percentage: 0.1, color: "#89e051" },
+    ],
     liveLink: "https://static-code-analyser-iota.vercel.app",
     githubLink: "https://github.com/egepakten/static-code-analyser",
     status: "PRODUCTION",
@@ -58,6 +112,7 @@ def learn(self, state, action, reward, nextState):
       "Q-Learning",
       "Reinforcement Learning",
     ],
+    languages: [{ name: "Python", percentage: 100.0, color: "#3572A5" }],
     liveLink: null,
     githubLink: "https://github.com/egepakten/pacman-ai-qlearning",
     status: "PRODUCTION",

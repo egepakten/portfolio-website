@@ -17,15 +17,25 @@ const TechStack = () => {
     PostgreSQL: { icon: "🐘", category: "Database" },
     MongoDB: { icon: "🍃", category: "Database" },
     AWS: { icon: "☁️", category: "Cloud" },
+    "AWS Lambda": { icon: "λ", category: "Cloud" },
+    DynamoDB: { icon: "🗄️", category: "Database" },
+    "API Gateway": { icon: "🚪", category: "Cloud" },
+    Serverless: { icon: "⚡", category: "Architecture" },
     Docker: { icon: "🐳", category: "DevOps" },
     Git: { icon: "📦", category: "Tools" },
     GraphQL: { icon: "◈", category: "API" },
-    Flask: { icon: "🐍", category: "Backend" },
+    Flask: { icon: "🧪", category: "Backend" },
     "Machine Learning": { icon: "🤖", category: "AI" },
     "Q-Learning": { icon: "🎓", category: "AI" },
-    "Reinforcement Learning": { icon: "🤖", category: "AI" },
+    "Reinforcement Learning": { icon: "🧠", category: "AI" },
     AST: { icon: "🌳", category: "Tools" },
     JavaScript: { icon: "📜", category: "Language" },
+    CSS: { icon: "🎨", category: "Styling" },
+    HTML: { icon: "📄", category: "Language" },
+    Makefile: { icon: "⚙️", category: "Tools" },
+    PowerShell: { icon: "💻", category: "Language" },
+    C: { icon: "©️", category: "Language" },
+    Shell: { icon: "🐚", category: "Language" },
   };
 
   // Dynamically generate technologies from projects
@@ -54,30 +64,14 @@ const TechStack = () => {
   const projectTechUsage = useMemo(() => {
     const techProjects = {};
 
-    // Language color mapping
-    const languageColors = {
-      Python: "#3572A5",
-      TypeScript: "#3178c6",
-      JavaScript: "#f1e05a",
-      CSS: "#563d7c",
-      HTML: "#e34c26",
-      Shell: "#89e051",
-      "Jupyter Notebook": "#DA5B0B",
-      Dockerfile: "#384d54",
-    };
-
     projects.forEach((project) => {
       project.technologies.forEach((tech) => {
         if (!techProjects[tech]) {
           techProjects[tech] = [];
         }
 
-        // Create language breakdown based on project technologies
-        const languages = project.technologies.map((t) => ({
-          name: t,
-          percentage: (100 / project.technologies.length).toFixed(1),
-          color: languageColors[t] || "#888888",
-        }));
+        // Use real language data from project if available
+        const languages = project.languages || [];
 
         techProjects[tech].push({
           project: project.title,
@@ -303,8 +297,8 @@ const TechStack = () => {
                   {/* Footer Info */}
                   <div className="mt-6 pt-6 border-t border-accent-cyan/20">
                     <p className="text-gray-400 text-sm text-center">
-                      💡 Click outside to close • Language percentages are based
-                      on code analysis
+                      💡 Click outside to close • Language percentages are from
+                      GitHub repository analysis
                     </p>
                   </div>
                 </motion.div>
