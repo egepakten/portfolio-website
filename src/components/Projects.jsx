@@ -137,10 +137,13 @@ const Projects = () => {
                   {currentProject && (
                     <motion.div
                       key={currentProjectIndex}
-                      initial={{ opacity: 0, x: 100 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -100 }}
-                      transition={{ duration: 0.4 }}
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{ 
+                        duration: 0.25,
+                        ease: [0.4, 0, 0.2, 1]
+                      }}
                       className="relative bg-navy-light/30 backdrop-blur-sm rounded-lg overflow-hidden border border-accent-cyan/10 hover:border-accent-cyan/30 transition-all shadow-2xl"
                     >
                       {/* Side Navigation Areas */}
