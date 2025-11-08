@@ -132,50 +132,6 @@ const Projects = () => {
 
               {/* Carousel Container */}
               <div className="relative max-w-7xl mx-auto">
-                {/* Navigation Arrows */}
-                {filteredProjects.length > 1 && (
-                  <>
-                    <button
-                      onClick={prevProject}
-                      className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-16 z-20 w-14 h-14 rounded-full bg-accent-cyan/10 hover:bg-accent-cyan/20 border-2 border-accent-cyan/30 hover:border-accent-cyan flex items-center justify-center transition-all"
-                      aria-label="Previous project"
-                    >
-                      <svg
-                        className="w-7 h-7 text-accent-cyan"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2.5}
-                          d="M15 19l-7-7 7-7"
-                        />
-                      </svg>
-                    </button>
-                    <button
-                      onClick={nextProject}
-                      className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-16 z-20 w-14 h-14 rounded-full bg-accent-cyan/10 hover:bg-accent-cyan/20 border-2 border-accent-cyan/30 hover:border-accent-cyan flex items-center justify-center transition-all"
-                      aria-label="Next project"
-                    >
-                      <svg
-                        className="w-7 h-7 text-accent-cyan"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2.5}
-                          d="M9 5l7 7-7 7"
-                        />
-                      </svg>
-                    </button>
-                  </>
-                )}
-
                 {/* Project Card */}
                 <AnimatePresence mode="wait">
                   {currentProject && (
@@ -185,8 +141,60 @@ const Projects = () => {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -100 }}
                       transition={{ duration: 0.4 }}
-                      className="bg-navy-light/30 backdrop-blur-sm rounded-lg overflow-hidden border border-accent-cyan/10 hover:border-accent-cyan/30 transition-all shadow-2xl"
+                      className="relative bg-navy-light/30 backdrop-blur-sm rounded-lg overflow-hidden border border-accent-cyan/10 hover:border-accent-cyan/30 transition-all shadow-2xl"
                     >
+                      {/* Side Navigation Areas */}
+                      {filteredProjects.length > 1 && (
+                        <>
+                          {/* Left Navigation Area */}
+                          <button
+                            onClick={prevProject}
+                            className="absolute left-0 top-0 bottom-0 w-20 z-30 group cursor-pointer"
+                            aria-label="Previous project"
+                          >
+                            <div className="absolute inset-0 bg-gradient-to-r from-navy-dark/0 via-navy-dark/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                            <div className="absolute left-6 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-110">
+                              <svg
+                                className="w-8 h-8 text-accent-cyan drop-shadow-[0_0_10px_rgba(100,255,218,0.5)]"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={3}
+                                  d="M15 19l-7-7 7-7"
+                                />
+                              </svg>
+                            </div>
+                          </button>
+
+                          {/* Right Navigation Area */}
+                          <button
+                            onClick={nextProject}
+                            className="absolute right-0 top-0 bottom-0 w-20 z-30 group cursor-pointer"
+                            aria-label="Next project"
+                          >
+                            <div className="absolute inset-0 bg-gradient-to-l from-navy-dark/0 via-navy-dark/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                            <div className="absolute right-6 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-110">
+                              <svg
+                                className="w-8 h-8 text-accent-cyan drop-shadow-[0_0_10px_rgba(100,255,218,0.5)]"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={3}
+                                  d="M9 5l7 7-7 7"
+                                />
+                              </svg>
+                            </div>
+                          </button>
+                        </>
+                      )}
                       {/* Side-by-side Layout */}
                       <div className="flex flex-col lg:flex-row">
                         {/* Left Side: Demo Image */}
