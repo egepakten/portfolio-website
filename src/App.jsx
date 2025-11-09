@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Analytics } from "@vercel/analytics/react";
 import Sidebar from "./components/Sidebar";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -44,6 +45,8 @@ function App() {
         <TechStack />
         <Contact />
       </main>
+
+      <Analytics />
     </div>
   );
 }
