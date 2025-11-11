@@ -87,6 +87,49 @@ def analyze_function_length(tree):
     year: "2024",
   },
   {
+    title: "WiseUni Student Registry",
+    description:
+      "AWS Cognito integration demo for student authentication and authorization. Features Hosted UI login, Lambda triggers for custom validation, Identity Pool for AWS resource access, and fine-grained S3/DynamoDB permissions using policy variables.",
+    code: `# Lambda Pre-Signup Trigger
+def lambda_handler(event, context):
+  """Validates student email before signup"""
+  email = event['request']['userAttributes']['email']
+  
+  # Only allow university emails
+  if not email.endswith('@university.edu'):
+    raise Exception('Only university emails allowed')
+  
+  # Auto-confirm university emails
+  event['response']['autoConfirmUser'] = True
+  event['response']['autoVerifyEmail'] = True
+  
+  return event`,
+    demoImage: "/project_Images/cognito_student_registry.png",
+    demoGradient: "from-blue-600 via-indigo-600 to-purple-600",
+    demoType: "in-development",
+    demoUrl: null,
+    technologies: [
+      "AWS Cognito",
+      "AWS Lambda",
+      "DynamoDB",
+      "S3",
+      "TypeScript",
+      "Python",
+      "IAM",
+      "Serverless",
+    ],
+    languages: [
+      { name: "Python", percentage: 53.1, color: "#3572A5" },
+      { name: "TypeScript", percentage: 34.7, color: "#3178c6" },
+      { name: "CSS", percentage: 10.2, color: "#563d7c" },
+      { name: "Other", percentage: 2.0, color: "#888888" },
+    ],
+    liveLink: null,
+    githubLink: "https://github.com/egepakten/cognito-student-registry",
+    status: "IN DEVELOPMENT",
+    year: "2025",
+  },
+  {
     title: "Pacman Q-Learning Agent",
     description:
       "Reinforcement Learning implementation for Pacman game using Q-Learning algorithm. King's College London Machine Learning coursework featuring temporal difference learning, ε-greedy exploration, reward shaping, and adaptive learning rates to train an agent that learns optimal strategies through trial and error.",

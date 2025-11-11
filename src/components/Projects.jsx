@@ -219,15 +219,51 @@ const Projects = () => {
                             }}
                           >
                             {currentProject.demoImage ? (
-                              <img
-                                src={currentProject.demoImage}
-                                alt={`${currentProject.title} screenshot`}
-                                className={`${
-                                  currentProject.demoType === "game"
-                                    ? "max-h-full max-w-full object-contain"
-                                    : "w-full h-full object-cover"
-                                }`}
-                              />
+                              <>
+                                <img
+                                  src={currentProject.demoImage}
+                                  alt={`${currentProject.title} screenshot`}
+                                  className={`${
+                                    currentProject.demoType === "game"
+                                      ? "max-h-full max-w-full object-contain"
+                                      : "w-full h-full object-cover"
+                                  } ${
+                                    currentProject.status === "IN DEVELOPMENT"
+                                      ? "blur-sm"
+                                      : ""
+                                  }`}
+                                />
+                                {currentProject.status === "IN DEVELOPMENT" && (
+                                  <div className="absolute inset-0 bg-navy-dark/30 backdrop-blur-[2px] flex items-center justify-center">
+                                    <div className="bg-navy-dark/90 backdrop-blur-sm px-6 py-3 rounded-lg border-2 border-accent-cyan/50 shadow-2xl">
+                                      <div className="flex items-center gap-3">
+                                        <svg
+                                          className="w-6 h-6 text-accent-cyan animate-pulse"
+                                          fill="none"
+                                          stroke="currentColor"
+                                          viewBox="0 0 24 24"
+                                        >
+                                          <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                                          />
+                                          <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                          />
+                                        </svg>
+                                        <span className="text-accent-cyan font-mono text-sm font-bold">
+                                          Under Construction
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                )}
+                              </>
                             ) : (
                               <div
                                 className={`w-full h-full bg-gradient-to-br ${currentProject.demoGradient} flex items-center justify-center`}
@@ -239,14 +275,15 @@ const Projects = () => {
                             )}
 
                             {/* Live Badge */}
-                            {currentProject.demoType === "live-demo" && (
-                              <div className="absolute top-4 right-4 px-3 py-1.5 bg-green-500/90 backdrop-blur-sm rounded-full flex items-center gap-2 shadow-lg">
-                                <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
-                                <span className="text-white text-xs font-bold">
-                                  LIVE
-                                </span>
-                              </div>
-                            )}
+                            {currentProject.demoType === "live-demo" &&
+                              currentProject.status !== "IN DEVELOPMENT" && (
+                                <div className="absolute top-4 right-4 px-3 py-1.5 bg-green-500/90 backdrop-blur-sm rounded-full flex items-center gap-2 shadow-lg">
+                                  <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
+                                  <span className="text-white text-xs font-bold">
+                                    LIVE
+                                  </span>
+                                </div>
+                              )}
 
                             {/* Hover Overlay */}
                             <div className="absolute inset-0 bg-navy-dark/90 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -302,6 +339,8 @@ const Projects = () => {
                                   className={`px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap ${
                                     currentProject.status === "PRODUCTION"
                                       ? "bg-green-500/20 text-green-400 border border-green-500/30"
+                                      : currentProject.status === "IN DEVELOPMENT"
+                                      ? "bg-orange-500/20 text-orange-400 border border-orange-500/30 animate-pulse"
                                       : "bg-yellow-500/20 text-yellow-400 border border-yellow-500/30"
                                   }`}
                                 >
