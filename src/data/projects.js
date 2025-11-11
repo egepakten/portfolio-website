@@ -104,7 +104,7 @@ def lambda_handler(event, context):
   event['response']['autoVerifyEmail'] = True
   
   return event`,
-    demoImage: "/project_Images/cognito_student_registry.png",
+    demoImage: "/screenshots/cognito_student_registry.png",
     demoGradient: "from-blue-600 via-indigo-600 to-purple-600",
     demoType: "in-development",
     demoUrl: null,
